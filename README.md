@@ -26,7 +26,7 @@ You can also add the library via script tag and use `window.Iframily`:
 
 ```html
 <head>
-    <script src="https://raw.githubusercontent.com/asimen1/ext-messenger/master/dist/ext-messenger.min.js"></script>
+    <script src="https://raw.githubusercontent.com/EkoLabs/iframily/main/dist/iframily.min.js"></script>
 </head>
 
 <body>
@@ -35,8 +35,6 @@ You can also add the library via script tag and use `window.Iframily`:
     </script>
 </body>
 ```
-
-MY TODO: replace with real link for script tag...
 
 ## API
 
