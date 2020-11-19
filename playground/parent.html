@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>PLAYGROUND</title>
+        <script src="/dist/iframily.min.js"></script>
+
+        <style>
+            .bold {
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="bold">parent.html</div>
+        <div style="margin-bottom: 20px;">-> iframily inited in <span class="bold">window.parent</span></div>
+
+        <script>
+            window.parent = window.Iframily.initParent('playground', (msg) => {
+                console.log('parent got message:', msg);
+            }, {
+                onPairedHandler: function() { console.log('parent paired'); },
+                onDisposedHandler: function() { console.log('parent disposed'); }
+            });
+        </script>
+
+        <iframe name="childFrame" src="/playground/child.html" style="width: 400px;"></iframe>
+    </body>
+</html>

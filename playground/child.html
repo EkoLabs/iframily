@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <script src="/dist/iframily.min.js"></script>
+
+        <style>
+            .bold {
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="bold">child.html</div>
+        <div style="margin-bottom: 20px;">-> iframily inited in <span class="bold">window.child</span></div>
+
+        <script>
+            window.child = window.Iframily.initChild('playground', (msg) => {
+                console.log('child got message:', msg);
+            }, {
+                onPairedHandler: function() { console.log('child paired'); },
+                onDisposedHandler: function() { console.log('child disposed'); }
+            });
+        </script>
+    </body>
+</html>
