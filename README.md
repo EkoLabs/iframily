@@ -19,7 +19,7 @@ This is how it works:
 ## How do I get set up
 
 ```shell
-npm i iframily --save
+npm i @ekolabs/iframily --save
 ```
 
 You can also add the library via script tag and use `window.Iframily`:
@@ -112,7 +112,7 @@ Returns the id that this iframily was inited with.
 // -------------------------
 // In the parent frame.
 // -------------------------
-const Iframily = require('iframily');
+const Iframily = require('@ekolabs/iframily');
 
 let msgHandler = function(msg)
     console.log('parent got message:', msg);
@@ -135,7 +135,7 @@ parent.sendMessage('do something async')
 // -------------------------
 // In the child frame.
 // -------------------------
-const Iframily = require('iframily');
+const Iframily = require('@ekolabs/iframily');
 
 let msgHandler = function(msg) {
     console.log('child got message:', msg);
