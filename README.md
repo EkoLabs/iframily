@@ -30,13 +30,13 @@ You can also add the library via script tag and use `window.Iframily`, like so:
 
 ## API
 
-### Iframily singleton
+### ⭒ Iframily singleton:
 
 Iframily is a singleton and will allow you to initialize parent/child [iframily instances](#iframily-instance).
 
-#### Iframily.initParent(id, msgHandler, options) -> `iframily instance`
+#### `Iframily.initParent(id, msgHandler, options) -> iframily instance`
 
-#### Iframily.initChild(id, msgHandler, options) -> `iframily instance`
+#### `Iframily.initChild(id, msgHandler, options) -> iframily instance`
 
 Creates a parent/child [iframily instance](#iframily-instance) respectively (to be used in the parent/child frame) and returns it, if successful.
 
@@ -49,7 +49,7 @@ Creates a parent/child [iframily instance](#iframily-instance) respectively (to 
 | options.onDisposedHandler | `function` | Optional - A handler that will be invoked when the instance is disposed. |
 | options.targetOrigin | `URI` | Optional - The URI to use as the target origin for the `postMessage` call. Use this if you are passing sensitive data, see [link](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) for more info. Default is '*'.|
 
-#### Iframily.isIframilyMessage(event) -> `boolean`
+#### `Iframily.isIframilyMessage(event) -> boolean`
 
 If you manually listen to messages using the window ["message" event](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage#The_dispatched_event) you will also receive internal iframily messages. This method will return `true` for this events so you can easily identify them.
 
@@ -67,11 +67,11 @@ function receiveMessage(event) {
 }
 ```
 
-### iframily instance
+### ⭒ iframily instance:
 
-The iframily instance is the object returned when initing a new connecter using the `initParent()` or `initChild()` methods.
+The iframily instance is the object returned when initing a new iframily using the `initParent()` or `initChild()` methods.
 
-#### f.sendMessage(msg) -> `Promise`
+#### `f.sendMessage(msg) -> Promise`
 
 | Param           | Type           | Description  |
 | :-------------: |:--------------:| :------------|
@@ -81,7 +81,7 @@ Returns a promise that will be resolved with the response value from the receivi
 
 > if the receiving iframily instance did not return an explicit response value in its message handler, the promise will be resolved with `undefined`.
 
-#### f.dispose()
+#### `f.dispose()`
 
 Dispose of the iframily instance, making it obsolete.
 
@@ -90,11 +90,11 @@ Dispose of the iframily instance, making it obsolete.
 
 This method is useful when you have a parent frame which recreates the same child frame and you want to use the same id for the iframilies.
 
-#### f.disposed -> `boolean` (read only)
+#### `f.disposed -> boolean (read only)`
 
 Returns `true` if this iframily instance has been disposed.
 
-#### f.id -> `string` (read only)
+#### `f.id -> string (read only)`
 
 Returns the id that this iframily was inited with.
 
