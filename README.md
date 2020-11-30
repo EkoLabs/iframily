@@ -1,13 +1,13 @@
 # Iframily
 
-Iframily is a tiny (zero dependency) library which modernizes IFrames communication.
+Iframily is a small javascript library that simplifies communication between frames.
 
 This is how it works:
 
-1. Create framilies in the parent frame.
-2. Create framilies in the child frame.
+1. Create iframilies in the parent frame.
+2. Create iframilies in the child frame.
 3. If a parent id and child id match, they will pair.
-4. Send messages between paired framilies.
+4. Send messages between paired iframilies.
 
 ## Features
 
@@ -22,18 +22,10 @@ This is how it works:
 npm i @ekolabs/iframily --save
 ```
 
-You can also add the library via script tag and use `window.Iframily`:
+You can also add the library via script tag and use `window.Iframily`, like so:
 
 ```html
-<head>
-    <script src="https://raw.githubusercontent.com/EkoLabs/iframily/main/dist/iframily.min.js"></script>
-</head>
-
-<body>
-    <script>
-        let Iframily = window.Iframily;
-    </script>
-</body>
+<script src="https://unpkg.com/@ekolabs/iframily"></script>
 ```
 
 ## API
@@ -50,7 +42,7 @@ Creates a parent/child [iframily instance](#iframily-instance) respectively (to 
 
 | Param           | Type           | Description  |
 | :-------------: |:--------------:| :------------|
-| id | `string` | A unique id to identify this [iframily instance](#iframily-instance), this is used in order to match parent and child framilies. Will abort and log an error if the id already exists in the current frame. |
+| id | `string` | A unique id to identify this [iframily instance](#iframily-instance), this is used in order to match parent and child iframilies. Will abort and log an error if the id already exists in the current frame. |
 | msgHandler | `function` | Optional - A handler for incoming messages from the paired iframily in the parent/child frame. The `msgHandler` can return back a response value or a promise that will be resolved/rejected with a response value.  |
 | options | `object` | Optional - Additional options, see possible options below: |
 | options.onPairedHandler | `function` | Optional - A handler that will be invoked upon pairing. |
@@ -75,7 +67,7 @@ function receiveMessage(event) {
 }
 ```
 
-### Iframily instance
+### iframily instance
 
 The iframily instance is the object returned when initing a new connecter using the `initParent()` or `initChild()` methods.
 
@@ -94,9 +86,9 @@ Returns a promise that will be resolved with the response value from the receivi
 Dispose of the iframily instance, making it obsolete.
 
 > * You cannot reuse a disposed instance, you can however create a new instance with the same id.
-> * Any framilies paired with this instance will still keep sending messages to the disposed instance but they will be ignored.
+> * Any iframilies paired with this instance will still keep sending messages to the disposed instance but they will be ignored.
 
-This method is useful when you have a parent frame which recreates the same child frame and you want to use the same id for the framilies.
+This method is useful when you have a parent frame which recreates the same child frame and you want to use the same id for the iframilies.
 
 #### f.disposed -> `boolean` (read only)
 
@@ -114,18 +106,18 @@ Returns the id that this iframily was inited with.
 // -------------------------
 const Iframily = require('@ekolabs/iframily');
 
-let msgHandler = function(msg)
+let msgHandler = function(msg) {
     console.log('parent got message:', msg);
 };
 
-let parent = Iframily.initParent('myUniqueId', msgHandler);
+let iframilyParent = Iframily.initParent('myUniqueId', msgHandler);
 
-parent.sendMessage('do something')
+iframilyParent.sendMessage('do something')
     .then((response) => {
         console.log('parent got response:', response);
     });
 
-parent.sendMessage('do something async')
+iframilyParent.sendMessage('do something async')
     .then((response) => {
         console.log('parent got async response:', response);
     });
@@ -149,23 +141,23 @@ let msgHandler = function(msg) {
     }
 };
 
-let child = Iframily.initChild('myUniqueId', msgHandler);
+let iframilyChild = Iframily.initChild('myUniqueId', msgHandler);
 
-child.sendMessage({ text: 'fancy' });
+iframilyChild.sendMessage({ text: 'fancy' });
 ```
 
 * Your unique id (`myUniqueId` in the example) should match between parent and child.
 
 ## Notes
 
-* You can create multiple framilies in each frame but the unique ids cannot be used more than once per frame (unless the previous one has been disposed).
+* You can create multiple iframilies in each frame but the unique ids cannot be used more than once per frame (unless the previous one has been disposed).
 * Parent can connect to one child only and vice versa (due to previous note).
 * Designed for modern browsers (IE not supported).
 
 ## Contributing
 
 * `npm run dev` - builds unuglified bundle and watches for changes.
-* `npm run playground` - launch a simple page with a parent and child frame framilies to manually test out stuff.
+* `npm run playground` - launch a simple page with a parent and child frame iframilies to manually test out stuff.
 * Please make all push requests against the `develop` branch.
 * Please update/add tests coverage.
 * Pay attention to linting (they will fail the production bundle build).

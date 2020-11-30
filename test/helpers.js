@@ -22,7 +22,7 @@ async function initIframily(type, options = {}) {
     let initMethodName = constants.INIT_METHOD_NAMES[type];
 
     await frame.evaluate((_iframilyVarName, _id, _targetOrigin, _initMethodName) => {
-        // This object might have already been initialized by other framilies init.
+        // This object might have already been initialized by other iframilies init.
         window.messagesReceived = window.messagesReceived || {};
 
         // Messages received specific to this iframily id.

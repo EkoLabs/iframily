@@ -41,7 +41,7 @@ describe('advanced', () => {
         expect(errorsChild[0][0]).toBe(`[Iframily] - A child iframily with id "${constants.DEFAULT_FRAMILY_ID}" was already inited, please use another id or dispose the existing one first.`);
     });
 
-    test('can create framilies using disposed framilies ids', async () => {
+    test('can create iframilies using disposed iframilies ids', async () => {
         await helpers.wrapConsoleError(constants.FRAME_TYPE_PARENT);
         await helpers.wrapConsoleError(constants.FRAME_TYPE_CHILD);
 

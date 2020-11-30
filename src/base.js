@@ -81,7 +81,7 @@ module.exports = class Base {
             this._postMessage(wrappedMsg);
         } else {
             // eslint-disable-next-line no-console
-            console.warn('[Iframily] - No one connected yet, queuing message', msg);
+            console.warn('[Iframily] - No one connected yet, queuing message:', msg);
             this._msgQueue.push(this._postMessage.bind(this, wrappedMsg));
         }
     }
