@@ -32,17 +32,17 @@ You can also add the library via script tag and use `window.Iframily`, like so:
 
 ### ⭒ Iframily singleton:
 
-Iframily is a singleton and will allow you to initialize parent/child [iframily instances](#⭒-iframily-instance).
+Iframily is a singleton and will allow you to initialize parent/child [iframily instances](#-iframily-instance).
 
 #### `Iframily.initParent(id, msgHandler, options) -> iframily instance`
 
 #### `Iframily.initChild(id, msgHandler, options) -> iframily instance`
 
-Creates a parent/child [iframily instance](#⭒-iframily-instance) respectively (to be used in the parent/child frame) and returns it, if successful.
+Creates a parent/child [iframily instance](#-iframily-instance) respectively (to be used in the parent/child frame) and returns it, if successful.
 
 | Param           | Type           | Description  |
 | :-------------: |:--------------:| :------------|
-| id | `string` | A unique id to identify this [iframily instance](#⭒-iframily-instance), this is used in order to match parent and child iframilies. Will abort and log an error if the id already exists in the current frame. |
+| id | `string` | A unique id to identify this [iframily instance](#-iframily-instance), this is used in order to match parent and child iframilies. Will abort and log an error if the id already exists in the current frame. |
 | msgHandler | `function` | Optional - A handler for incoming messages from the paired iframily in the parent/child frame. The `msgHandler` can return back a response value or a promise that will be resolved/rejected with a response value.  |
 | options | `object` | Optional - Additional options, see possible options below: |
 | options.onPairedHandler | `function` | Optional - A handler that will be invoked upon pairing. |
