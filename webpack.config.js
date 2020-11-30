@@ -18,7 +18,7 @@ module.exports = (env, argv) => {
             libraryTarget: 'umd'
         },
 
-        devtool: isDevelopmentMode ? 'eval' : 'source-map',
+        devtool: isDevelopmentMode ? 'eval' : '',
 
         module: {
             rules: [
