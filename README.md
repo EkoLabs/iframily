@@ -158,7 +158,7 @@ iframilyChild.sendMessage({ text: 'fancy' });
 
 * `npm run dev` - builds unuglified bundle and watches for changes.
 * `npm run playground` - launch a simple page with a parent and child frame iframilies to manually test out stuff.
-* Please make all push requests against the `develop` branch.
+* Please make all pull requests against the `develop` branch.
 * Please update/add tests coverage.
 * Pay attention to linting (they will fail the production bundle build).
 * `npm run test` - run tests.
