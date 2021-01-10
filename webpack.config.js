@@ -15,7 +15,13 @@ module.exports = (env, argv) => {
             path: path.join(__dirname, 'dist'),
             filename: 'iframily.min.js',
             library: 'Iframily',
-            libraryTarget: 'umd'
+            libraryTarget: 'umd',
+
+            // NOTE: Important in order for the library to support handling "require()" in node env.
+            // NOTE: see https://github.com/webpack/webpack/issues/6677
+            // NOTE: see https://medium.com/@JakeXiao/window-is-undefined-in-umd-library-output-for-webpack4-858af1b881df
+            // NOTE: see https://webpack.js.org/configuration/output/#outputglobalobject
+            globalObject: 'this'
         },
 
         devtool: isDevelopmentMode ? 'eval' : '',
