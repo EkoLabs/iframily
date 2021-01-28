@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <title>iframily treehouse</title>
+
+    <style>
+    </style>
+
+    <script src="../../dist/iframily.min.js"></script>
+</head>
+<body>
+    <div>CHILD</div>
+    <button onclick="sendQuestion()">SEND RANDOM QUESTION</button>
+    <div id="dialogue" style="margin-top: 10px"></div>
+
+    <script>
+        let dialogueEl = document.querySelector('#dialogue');
+
+        let dialogue = {
+            'Why aren\'t there any more dinosaurs?': {
+                '🙂': 'They became extinct millions of years ago?',
+                '🧪': 'They became extinct millions of years ago?',
+
+                '😐': 'What? What happened to them?',
+                '🤷‍♀️': 'What? What happened to them?',
+
+                '😠': 'What do you mean “we killed them all”?',
+                '🔫': 'What do you mean “we killed them all”?',
+                '⚰️': 'What do you mean “we killed them all”?',
+                '🗡': 'What do you mean “we killed them all”?',
+
+                '🍜': 'What do you mean “we ate them all”???',
+                '🍼': 'What do you mean “we ate them all”???',
+
+                '🐶': 'They became dogs? really?',
+
+                '🚗': 'What do you mean “they drove away”?',
+
+                default: '...what?',
+                timeout: 'Well I guess we’ll never know'
+            }
+        }
+
+        let childIFramily = Iframily.initChild('treehouse');
+
+        function sendQuestion() {
+            let questions = Object.keys(dialogue);
+            let currQuestion = questions[Math.floor(Math.random() * questions.length)];
+
+            let timeoutID;
+            childIFramily.sendMessage(currQuestion)
+                .then((resp) => {
+                    console.log('child got response:', resp);
+
+                    window.clearTimeout(timeoutID);
+
+                    dialogueEl.innerText += `\n p: ${resp}`;
+
+                    let responses = dialogue[currQuestion];
+                    let responseOfTheResponse = responses[resp] || responses.default;
+
+                    // Just to make it more real...
+                    setTimeout(() => {
+                        console.log(responseOfTheResponse);
+                        dialogueEl.innerText += `\n c: ${responseOfTheResponse}`;
+                    }, 2000);
+                })
+                .catch(() => {
+                    console.log('child timeout!');
+
+                    let responses = dialogue[currQuestion];
+                    let responseOfTheResponse = responses.timeout;
+                    dialogueEl.innerText += `\n c: ${responseOfTheResponse}`;
+                });
+
+            dialogueEl.innerText = ` c: ${currQuestion}`;
+
+            timeoutID = window.setTimeout(() => {
+                childIFramily.sendMessage('timeout');
+            }, 3000);
+        }
+    </script>
+</body>

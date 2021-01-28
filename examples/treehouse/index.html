@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <title>iframily treehouse</title>
+
+    <style>
+        iframe {
+            margin: 10px;
+        }
+    </style>
+
+    <script src="../../dist/iframily.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/gh/EkoLabs/iframily/dist/iframily.min.js"></script> -->
+</head>
+<body>
+    <div>PARENT</div>
+    <div id="emojis" style="width:250px"></div>
+    <iframe src="./child.html"></iframe>
+    <!-- <iframe src="https://cdn.jsdelivr.net/gh/EkoLabs/iframily/examples/treehouse/child.html"></iframe> -->
+
+    <script>
+        let responses = [
+            '🙂', '😐', '😠', '🤷‍♀️', '❤️', '🍼', '☕',
+            '🍜', '🍺', '🔫', '🗡', '💩', '🕹', '⚰️',
+            '🚽', '🧺', '📉', '💵', '🧪', '🎸', '🏠',
+            '🚿', '🐶', '💊', '🚗', '📺'
+        ];
+
+        // Add all emojis as buttons.
+        let emojisEl = document.querySelector('#emojis');
+        responses.forEach((respEmoji) => {
+            let btn = document.createElement('button');
+            btn.innerText = respEmoji;
+            btn.style.fontSize = '20px';
+            btn.addEventListener('click', onEmojiClicked);
+
+            emojisEl.appendChild(btn);
+        });
+
+        let currResponseResolve = () => {};
+        let currResponseReject = () => {};
+        let parentIframily = Iframily.initParent('treehouse', (msg) => {
+            console.log('parent got msg:', msg);
+
+            if (msg === 'timeout') {
+                currResponseReject();
+            } else {
+                return new Promise((resolve, reject) => {
+                    currResponseResolve = resolve;
+                    currResponseReject = reject;
+                });
+            }
+        });
+
+        function onEmojiClicked(e) {
+            let emoji = e.currentTarget.innerText;
+            currResponseResolve(emoji);
+        }
+    </script>
+</body>
