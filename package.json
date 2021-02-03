@@ -11,6 +11,7 @@
     "build": "webpack --mode=production",
     "dev": "webpack --mode=development --watch",
     "playground": "http-server ./ -c-1 -p 8135 -o /playground/parent.html",
+    "examples": "http-server ./ -c-1 -p 8136 -o /examples",
     "test": "jest",
     "test-debug-mac": "node --inspect-brk node_modules/.bin/jest --runInBand --testTimeout=9999999 --watchAll",
     "test-debug-win": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand --testTimeout=9999999 --watchAll"
