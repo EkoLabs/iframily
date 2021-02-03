@@ -530,8 +530,8 @@
     // FINALLY, lets run the game
     //-------------------------------------------------------------------------
 
-    let frameType = window.frameElement.dataset.type;
-    let connectorId = window.frameElement.dataset.type;
+    let frameType = window.location.hash.match(/#type=(.*)/)[1];
+    let connectorId = window.location.hash.match(/#type=(.*)/)[1];
     if (frameType.startsWith('bottom')) {
       frameType = 'bottom';
     }
@@ -543,7 +543,7 @@
     }
 
     let childIframily = Iframily.initChild(connectorId, (msg) => {
-      console.log(`child ${frameType} got msg`, msg, playing);
+      // console.log(`child ${frameType} got msg`, msg);
 
       if (msg.action === 'start' && !started) {
         play();
