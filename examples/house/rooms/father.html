@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+
+        <link rel="stylesheet" href="../style/room.css"/>
+
+        <script src="../../../dist/iframily.min.js"></script>
+    </head>
+    <body class="father">
+        <div class="label">father.html</div>
+        <ul id="dialog">
+            <li class="message template">
+                <div class="dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="content"></div>
+            </li>
+        </ul>
+
+        <script>
+            window.dialogue = {
+                'Hon have you seen my hammer?': {
+                    '🚿': 'Oh right that’s where I left it',
+                    '🚗': 'Oh right that’s where I left it',
+                    '⚰️': 'Oh right that’s where I left it',
+                    '🚽': 'Oh right that’s where I left it',
+                    '🧺': 'Oh right that’s where I left it',
+
+                    '🐶': 'The dog did… what?',
+
+                    '💵': 'Fine I’ll get a new one (...we can’t just keep buying new hammers)',
+
+                    '🏠': 'I know it’s in the house but WHERE',
+
+                    default: 'Huh?',
+                    timeout: 'Nevermind, found it!'
+                },
+
+                'What do you want to watch tonight?': {
+                    '❤️': 'Please no.. not another romcom',
+
+                    '🔫': 'Yes! I’ll get the popcorn',
+                    '🗡': 'Yes! I’ll get the popcorn',
+
+                    '📺': 'Yes, watch on the TV. Where else?',
+
+                    '📉': 'That’s depressing',
+
+                    '☕': 'but cooking shows make me hungry...',
+                    '🍜': 'but cooking shows make me hungry...',
+                    '🍺': 'but cooking shows make me hungry...',
+
+                    default: 'Really? I don’t really want to watch that',
+                    timeout: 'Guess I’ll just watch by myself then'
+                }
+            }
+
+            window.frameIframily = Iframily.initChild('father');
+        </script>
+        <script src="frame.js" type="text/javascript"></script>
+    </body>
+</html>

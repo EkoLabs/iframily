@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+html{
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+body{
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-size: cover;
+}
+
+body.brother{
+  background-image: url(../images/brother_room.png);
+  --highlight-color: #cd79d1;
+}
+
+body.baby{
+  background-image: url(../images/baby_room.png);
+  --highlight-color: #52bf5a;
+}
+
+body.sister{
+  background-image: url(../images/sister_room.png);
+  --highlight-color: #fca147;
+}
+
+body.father{
+  background-image: url(../images/father_room.png);
+  --highlight-color: #72d3ca;
+}
+
+.label{
+  position: absolute;
+  top: 0;
+  left:0;
+  background: #e6e6e6;
+  font-size: 14px;
+  padding: 4px 6px;
+  font-weight: bold;
+  font-family: arial;
+}
+
+ul{
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  top: 0;
+  right: 0;
+  background: rgba(255,255,255,0.6);
+  list-style-type: none;
+  margin:0 ;
+  padding:0 ;
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+  overflow-y: scroll;
+
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE 10+ */
+  &::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* Chrome/Safari/Webkit */
+  }
+
+}
+
+li{
+  box-sizing: border-box;
+  margin: 10px;
+  box-shadow: black 5px 5px 5px;
+  border-radius: 5px;
+  border-top-left-radius: 0;
+  padding: 6px;
+  background: var(--highlight-color);
+  max-width: 70%;
+  font-family: 'Open Sans', sans-serif;
+  scroll-margin: 10px;
+
+  &.sent {
+    background: white;
+    border-radius: 5px;
+    border-top-right-radius: 0;
+    align-self: flex-end;
+  }
+
+  &:last-child{
+    margin-bottom: 1000px;
+  }
+}
+
+
+
+.message{
+  animation: showBubble 0.3s ease-out;
+}
+
+.message.template{
+  display: none;
+}
+
+.message .dots{
+  display: none;
+}
+
+.message.loading {
+  .content{
+    display: none;
+  }
+
+  .dots{
+    display: flex;
+  }
+}
+
+.dots {
+  align-items: center;
+  display: flex;
+  height: 17px;
+
+  span {
+    background-color: white;
+    animation: mercuryTypingAnimation 1.5s infinite ease-in-out;
+    border-radius: 2px;
+    display: inline-block;
+    height: 4px;
+    margin-right: 2px;
+    width: 4px;
+
+    &:nth-child(1){
+      nimation-delay:200ms;
+    }
+    &:nth-child(2){
+      animation-delay:300ms;
+    }
+    &:nth-child(3){
+      animation-delay:400ms;
+    }
+  }
+}
+
+
+
+@keyframes showBubble{
+  0%{
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100%{
+    transform: translateY(0px);
+    opacity: 1;
+  }
+
+}
+
+
+
+@keyframes mercuryTypingAnimation{
+  0%{ transform:translateY(0px) }
+  28%{ transform:translateY(-5px) }
+  44%{ transform:translateY(0px) }
+}

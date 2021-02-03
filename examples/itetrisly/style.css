@@ -1,0 +1,115 @@
+html {
+  width: 100%;
+  height: 100%; }
+
+body.parent {
+  height: 100%;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white; }
+
+body.parent iframe {
+  height: 200px;
+  width: 200px;
+  border: none;
+  pointer-events: none;
+  /* no need for interaction */ }
+
+body.parent #grid {
+  display: grid;
+  grid-template-columns: repeat(3, 200px);
+  /* center */
+  margin: auto; }
+
+body.parent #topIframe {
+  height: 312px;
+  grid-row: 1;
+  grid-column: 2; }
+
+body.parent #bottomContainer {
+  width: 600px;
+  grid-row: 2;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  display: flex; }
+
+.container {
+  border: 1px solid #22b573;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px; }
+
+.container .footer {
+  height: 100px;
+  padding-top: 10px;
+  border-top: 4px solid white;
+  display: flex;
+  align-items: flex-end; }
+
+.container .footer .controls {
+  font-family: ChessType; }
+
+.container .footer .credits {
+  margin-left: auto; }
+
+.container .footer .credits .eko {
+  position: relative;
+  top: 7px;
+  color: rgba(255, 255, 255, 0);
+  font-size: 30px;
+  background-image: url(./images/ekoengineering_logo.svg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  margin: 0 5px; }
+
+.container .footer .credits .eko span {
+  padding-left: 5px;
+  font-size: 16px; }
+
+.container .footer .arrows {
+  position: relative;
+  vertical-align: bottom;
+  margin-left: 9px; }
+
+body.child {
+  color: white; }
+
+body.child #tetris #menu {
+  display: none;
+  margin-bottom: 30px; }
+
+body.child #tetris #start {
+  display: none; }
+
+body.child #tetris #score {
+  border: 2px solid white;
+  font-family: ChessType;
+  font-size: 24px;
+  padding: 10px;
+  height: 26px; }
+
+body.child #tetris #upcoming {
+  margin: 0;
+  background-color: black;
+  border: 2px solid white;
+  width: 78px;
+  height: 78px;
+  margin-left: auto; }
+
+body.child #tetris #canvas {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  height: 100%;
+  background-size: 20px 20px, 20px 20px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.5) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 1px, transparent 1px);
+  background-position: 1px 1px; }
+
+@font-face {
+  font-family: 'ChessType';
+  font-style: normal;
+  font-weight: normal;
+  src: local("ChessType"), url("https://eko.com/s/sonorous/demos/track_mixer/ChessType.woff") format("woff"); }

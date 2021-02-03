@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+
+        <link rel="stylesheet" href="../style/room.css"/>
+
+        <script src="../../../dist/iframily.min.js"></script>
+    </head>
+    <body class="baby">
+        <div class="label">baby.html</div>
+        <ul id="dialog">
+            <li class="message template">
+                <div class="dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="content"></div>
+            </li>
+        </ul>
+
+        <script>
+            window.dialogue = {
+                '💩': {
+                    '💩': '🤢',
+
+                    '🔫': '☠',
+                    '🗡': '☠',
+                    '⚰️': '☠',
+
+                    '🚿': '👶',
+
+                    '🚽': '💩💩💩',
+
+                    default: '😭',
+                    timeout: '💩💩💩💩💩💩💩💩💩💩💩💩💩💩'
+                },
+
+                '🤢': {
+                    '💊': '😀',
+                    '🧪': '😀',
+
+                    '❤️': '☠',
+
+                    default: '🤮',
+                    timeout: '🤢🤢🤢'
+                },
+
+                '🍽️': {
+                    '🍼': '😋',
+
+                    '☕': '☠',
+                    '🍺': '☠',
+                    '📉': '☠',
+
+                    default: '😭',
+                    timeout: '☠'
+                }
+            }
+
+            window.frameIframily = Iframily.initChild('baby');
+        </script>
+        <script src="frame.js" type="text/javascript"></script>
+    </body>
+</html>
