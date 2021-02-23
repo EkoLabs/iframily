@@ -15,6 +15,9 @@
     </head>
     <body class="parent">
         <div class="container">
+            <a href="https://github.com/EkoLabs/iframily" class="logo"><img src="images/iFramilyLogo.png"/></a>
+            <div class="description">this willl be the iFramily tagline</div>
+            <div id="gameMessage">hit space to start</div>
             <div id="grid">
                 <iframe id="topIframe" src="./game/index.html#type=top"></iframe>
 
@@ -53,6 +56,7 @@
             let translateValueX = 0;
             let doneMessagesCounter = 0;
             let bottomContainerEl = document.querySelector('#bottomContainer');
+            let gameMessageEl = document.querySelector('#gameMessage');
 
             // ------------------------------------------------
             // METHODS
@@ -74,7 +78,10 @@
                         // console.log(`parent for bottom ${id} got msg`, msg);
 
                         if (msg.action === 'lose') {
-                            alert('LOSE!');
+                            gameMessageEl.style.color = 'red'
+                            gameMessageEl.style.display = 'block';
+                            gameMessageEl.innerHTML = 'game over<small>hit space to restart</small>';
+
                         } else if (msg.action === 'done') {
                             // Only when all expected 'done' messages received, relay the message
                             // to the top tetris so can start with a new piece.
@@ -192,6 +199,7 @@
                 switch(e.keyCode) {
                     case 32: // space
                         parentTopIframily.sendMessage({ action: 'start' });
+                        gameMessageEl.style.display = "none"
 
                         e.preventDefault();
                         break;

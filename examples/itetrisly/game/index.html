@@ -14,7 +14,7 @@
 </head>
 
 <body class="child">
-
+  <div class="label">frame.html</div>
   <div id="tetris">
     <p id="start" style="display:none"><a href="javascript:play();">Press Space to Play.</a></p>
     <div id="menu">
@@ -22,9 +22,9 @@
       <canvas id="upcoming"></canvas>
       <p style="display:none">rows <span id="rows">0</span></p>
     </div>
-    <canvas id="canvas">
-      Sorry, this example cannot be run because your browser does not support the &lt;canvas&gt; element
-    </canvas>
+    <div class="canvasContainer">
+      <canvas id="canvas" />
+    </div>
   </div>
 
   <script>

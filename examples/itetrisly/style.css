@@ -1,6 +1,18 @@
 html {
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+.label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #e6e6e6;
+  font-size: 12px;
+  padding: 4px 6px;
+  font-weight: bold;
+  font-family: arial;
+  color: black; }
 
 body.parent {
   height: 100%;
@@ -33,14 +45,60 @@ body.parent #bottomContainer {
   grid-row: 2;
   grid-column-start: 1;
   grid-column-end: 3;
+  gap: 0;
   display: flex; }
 
 .container {
+  position: relative;
+  min-width: 70vw;
   border: 1px solid #22b573;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   padding: 20px; }
+
+.container .logo {
+  position: absolute;
+  display: block;
+  width: 133px;
+  height: 133px;
+  left: 20px;
+  top: 20px;
+  z-index: 10; }
+
+.container .logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; }
+
+.container #gameMessage {
+  font-family: ChessType;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  background: black;
+  color: white;
+  padding: 30px;
+  border: 1px solid white;
+  font-size: 40px;
+  white-space: nowrap;
+  text-align: center;
+  z-index: 100; }
+
+.container #gameMessage small {
+  color: white;
+  display: block;
+  font-size: 20px; }
+
+.container .description {
+  position: absolute;
+  display: block;
+  width: 165px;
+  left: 20px;
+  top: 160px;
+  z-index: 10;
+  color: white; }
 
 .container .footer {
   height: 100px;
@@ -57,7 +115,7 @@ body.parent #bottomContainer {
 
 .container .footer .credits .eko {
   position: relative;
-  top: 7px;
+  top: 4px;
   color: rgba(255, 255, 255, 0);
   font-size: 30px;
   background-image: url(./images/ekoengineering_logo.svg);
@@ -75,11 +133,13 @@ body.parent #bottomContainer {
   margin-left: 9px; }
 
 body.child {
-  color: white; }
+  color: white;
+  overflow-y: hidden; }
 
 body.child #tetris #menu {
   display: none;
-  margin-bottom: 30px; }
+  margin-top: 16px;
+  margin-bottom: 15px; }
 
 body.child #tetris #start {
   display: none; }
@@ -89,7 +149,8 @@ body.child #tetris #score {
   font-family: ChessType;
   font-size: 24px;
   padding: 10px;
-  height: 26px; }
+  height: 26px;
+  margin-top: 20px; }
 
 body.child #tetris #upcoming {
   margin: 0;
@@ -99,14 +160,37 @@ body.child #tetris #upcoming {
   height: 78px;
   margin-left: auto; }
 
-body.child #tetris #canvas {
+body.child #tetris .canvasContainer {
+  position: relative;
   display: inline-block;
   vertical-align: top;
   width: 100%;
+  height: 100%; }
+
+body.child #tetris .canvasContainer canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+
+body.child #tetris .canvasContainer:before {
+  content: "";
+  position: absolute;
+  width: 100%;
   height: 100%;
   background-size: 20px 20px, 20px 20px;
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.5) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 1px, transparent 1px);
-  background-position: 1px 1px; }
+  background-image: linear-gradient(to right, white 0px, transparent 1px), linear-gradient(to bottom, white 0px, transparent 1px);
+  background-position: 0px 0px; }
+
+body.child #tetris .canvasContainer:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: 100% 100%;
+  background-image: linear-gradient(to top, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px), linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to left, white 1px, transparent 1px);
+  background-position: 0px 0px; }
 
 @font-face {
   font-family: 'ChessType';
