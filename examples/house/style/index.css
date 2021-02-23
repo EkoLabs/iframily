@@ -14,15 +14,25 @@ body {
   padding: 0;
   font-family: 'Open Sans', sans-serif; }
 
+.instructionsContainer {
+  position: absolute;
+  top: 180px;
+  left: 0; }
+
+@media only screen and (max-height: 1000px) {
+  .instructionsContainer {
+    top: 0; } }
+
 .label {
   position: absolute;
-  top: 0;
+  top: 50px;
   left: 0;
   background: #e6e6e6;
   font-size: 14px;
   padding: 4px 6px;
   font-weight: bold;
-  font-family: arial; }
+  font-family: arial;
+  z-index: 100; }
 
 .logo {
   position: absolute;
@@ -43,9 +53,15 @@ body {
   z-index: 10;
   left: 25px;
   top: 267px;
-  width: 230px;
   color: white;
-  font-size: 16px; }
+  font-size: 16px;
+  width: 160px;
+  text-shadow: 0px 0px 20px #000000; }
+
+@media only screen and (min-width: 1200px) {
+  .instructions {
+    width: 230px;
+    text-shadow: none; } }
 
 .instructions em {
   display: block;
@@ -56,7 +72,7 @@ body {
   position: absolute;
   z-index: 10;
   left: 25px;
-  top: 740px;
+  bottom: 5px;
   width: 500px;
   color: white;
   font-size: 14px; }
@@ -81,6 +97,10 @@ body {
   padding-bottom: 58.59408%;
   width: 100%;
   position: relative; }
+
+@media only screen and (max-height: 1000px) {
+  #aspect_ratio_box {
+    top: -140px; } }
 
 #container {
   position: absolute;
@@ -110,6 +130,8 @@ body {
 #character_select button {
   position: relative;
   background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   font-size: 0;
   outline: none;
   transition: all 0.06s ease-in; }
@@ -164,7 +186,11 @@ body {
   grid-template: repeat(5, 1fr)/repeat(5, 1fr); }
 
 #emoji_keyboard button {
-  font-size: 18px; }
+  font-size: 14px; }
+
+@media only screen and (min-width: 1200px) {
+  #emoji_keyboard button {
+    font-size: 18px; } }
 
 button {
   border: 0;

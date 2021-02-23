@@ -1,3 +1,14 @@
+@mixin bp3{
+  @media only screen and (min-width: 1200px){
+    @content;
+  }
+}
+@mixin shortAndWide{
+  @media only screen and (max-height: 1000px){
+    @content;
+  }
+}
+
 html{
   height: 100%;
   margin: 0;
@@ -16,15 +27,26 @@ body{
   font-family: 'Open Sans', sans-serif;
 }
 
+.instructionsContainer{
+  position: absolute;
+  top: 180px;
+  left: 0;
+
+  @include shortAndWide{
+    top: 0;
+  }
+}
+
 .label{
   position: absolute;
-  top: 0;
+  top: 50px;
   left:0;
   background: #e6e6e6;
   font-size: 14px;
   padding: 4px 6px;
   font-weight: bold;
   font-family: arial;
+  z-index: 100;
 }
 
 .logo {
@@ -48,9 +70,15 @@ body{
   z-index: 10;
   left: 25px;
   top: 267px;
-  width: 230px;
   color: white;
   font-size: 16px;
+  width: 160px;
+  text-shadow: 0px 0px 20px #000000;
+
+  @include bp3{
+    width: 230px;
+    text-shadow: none;
+  }
 
   em{
     display: block;
@@ -63,7 +91,7 @@ body{
   position: absolute;
   z-index: 10;
   left: 25px;
-  top: 740px;
+  bottom: 5px;
   width: 500px;
   color: white;
   font-size: 14px;
@@ -91,6 +119,10 @@ body{
   padding-bottom: 1367px /  2333px * 100%;
   width: 100%;
   position: relative;
+
+  @include shortAndWide{
+    top: -140px;
+  }
 }
 
 #container{
@@ -124,6 +156,8 @@ body{
 #character_select button{
   position: relative;
   background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   font-size: 0;
 
   outline: none;
@@ -188,7 +222,10 @@ body{
   flex: 1;
   grid-template: repeat(5, 1fr) / repeat(5, 1fr);
   button {
-    font-size: 18px;
+    font-size: 14px;
+    @include bp3{
+      font-size: 18px;
+    }
   }
 }
 
