@@ -19,12 +19,12 @@
             <div class="description">this willl be the iFramily tagline</div>
             <div id="gameMessage">hit space to start</div>
             <div id="grid">
-                <iframe id="topIframe" src="./game/index.html#type=top"></iframe>
+                <iframe id="topIframe" name="topIframe" src="./game/index.html#type=top"></iframe>
 
                 <div id="bottomContainer">
-                    <iframe id="bottom1" src="./game/index.html#type=bottom-1"></iframe>
-                    <iframe id="bottom2" src="./game/index.html#type=bottom-2"></iframe>
-                    <iframe id="bottom3" src="./game/index.html#type=bottom-3"></iframe>
+                    <iframe id="bottom1" name="bottom1" src="./game/index.html#type=bottom-1"></iframe>
+                    <iframe id="bottom2" name="bottom2" src="./game/index.html#type=bottom-2"></iframe>
+                    <iframe id="bottom3" name="bottom3" src="./game/index.html#type=bottom-3"></iframe>
                 </div>
             </div>
             <div class="footer">
@@ -51,18 +51,25 @@
             // ------------------------------------------------
 
             let parentTopIframily;
-            let parentBottomFramiliesArr;
+            let parentBottomIframiliesArr = [];
             let currPosX = 0;
             let translateValueX = 0;
             let doneMessagesCounter = 0;
             let bottomContainerEl = document.querySelector('#bottomContainer');
             let gameMessageEl = document.querySelector('#gameMessage');
+            let shouldReloadOnStart = false;
 
             // ------------------------------------------------
             // METHODS
             // ------------------------------------------------
 
             function initFramilies() {
+                // Dispose previous iframilies (important when restarting the game).
+                parentTopIframily && parentTopIframily.dispose();
+                parentBottomIframiliesArr.forEach((parentBottomIframily) => {
+                    parentBottomIframily.dispose();
+                });
+
                 // Iframily connection between this frame and the top tetris.
                 parentTopIframily = Iframily.initParent('top', (msg) => {
                     //console.log('parent top got msg', msg);
@@ -78,10 +85,11 @@
                         // console.log(`parent for bottom ${id} got msg`, msg);
 
                         if (msg.action === 'lose') {
-                            gameMessageEl.style.color = 'red'
+                            gameMessageEl.style.color = 'red';
                             gameMessageEl.style.display = 'block';
                             gameMessageEl.innerHTML = 'game over<small>hit space to restart</small>';
 
+                            shouldReloadOnStart = true;
                         } else if (msg.action === 'done') {
                             // Only when all expected 'done' messages received, relay the message
                             // to the top tetris so can start with a new piece.
@@ -95,7 +103,7 @@
                     });
                 }
 
-                parentBottomFramiliesArr = [
+                parentBottomIframiliesArr = [
                     initParentBottomIframily('bottom-1'),
                     initParentBottomIframily('bottom-2'),
                     initParentBottomIframily('bottom-3')
@@ -129,7 +137,7 @@
                     if (minAbsX >= boardAbsStartX && maxAbsX < boardAbsEndX) { // Fits entirely in one bottom tetris.
                         current.x = (current.x + BOARD_X_SIZE) - boardAbsStartX;
 
-                        parentBottomFramiliesArr[index].sendMessage(msg);
+                        parentBottomIframiliesArr[index].sendMessage(msg);
                         doneMessagesCounter++;
                     } else if (boardAbsEndX > minAbsX && boardAbsEndX <= maxAbsX) { // Fits but gets cut off at the right side.
                         let splitPosition = boardAbsEndX - currAbsX;
@@ -137,7 +145,7 @@
                         current.x = BOARD_X_SIZE - PIECE_GRID_SIZE;
                         current.type.blocks[current.dir] = current.type.blocksSplit[currBlock][`splitIn${splitPosition}`].left;
 
-                        parentBottomFramiliesArr[index].sendMessage(msg);
+                        parentBottomIframiliesArr[index].sendMessage(msg);
                         doneMessagesCounter++;
                     } else if (boardAbsStartX >= minAbsX && boardAbsStartX <= maxAbsX) { // Fits but gets cut off at the left side.
                         let splitPosition = boardAbsStartX - currAbsX;
@@ -145,7 +153,7 @@
                         current.x = 0;
                         current.type.blocks[current.dir] = current.type.blocksSplit[currBlock][`splitIn${splitPosition}`].right;
 
-                        parentBottomFramiliesArr[index].sendMessage(msg);
+                        parentBottomIframiliesArr[index].sendMessage(msg);
                         doneMessagesCounter++;
                     }
                 }
@@ -198,8 +206,18 @@
             function keydown(e) {
                 switch(e.keyCode) {
                     case 32: // space
+                        if (shouldReloadOnStart) {
+                            window.frames['topIframe'].location.reload();
+                            window.frames['bottom1'].location.reload();
+                            window.frames['bottom2'].location.reload();
+                            window.frames['bottom3'].location.reload();
+
+                            doneMessagesCounter = 0;
+                            initFramilies();
+                        }
+
                         parentTopIframily.sendMessage({ action: 'start' });
-                        gameMessageEl.style.display = "none"
+                        gameMessageEl.style.display = 'none';
 
                         e.preventDefault();
                         break;
@@ -209,6 +227,7 @@
 
                         e.preventDefault();
                         break;
+
                     case 37: // left
                         move('left');
 
@@ -223,7 +242,7 @@
 
                     case 40: // down
                         parentTopIframily.sendMessage({ action: 'down' });
-                        parentBottomFramiliesArr.forEach((parentBottomIframily) => {
+                        parentBottomIframiliesArr.forEach((parentBottomIframily) => {
                             parentBottomIframily.sendMessage({ action: 'down' });
                         });
 
