@@ -34,12 +34,12 @@ describe('basic', () => {
                 window.messagesReceived = [];
                 window.messageResponses = [];
                 window.messageResponsesCatch = [];
-                window.iframily = window.Iframily.initParent('someId', (msg) => {
+                window.iframily = window.Iframily.initParent('someId', 'dangerouslySetWildcard', (msg) => {
                     window.messagesReceived.push(msg);
                 });
             });
             await childFrame.evaluate(() => {
-                window.iframily = window.Iframily.initChild('someId', (msg) => {
+                window.iframily = window.Iframily.initChild('someId', 'dangerouslySetWildcard', (msg) => {
                     if (msg === 'hello from parent sync') {
                         return 'child response sync!';
                     }
@@ -224,12 +224,12 @@ describe('basic', () => {
                 window.messagesReceived = [];
                 window.messageResponses = [];
                 window.messageResponsesCatch = [];
-                window.iframily = window.Iframily.initChild('someId', (msg) => {
+                window.iframily = window.Iframily.initChild('someId', 'dangerouslySetWildcard', (msg) => {
                     window.messagesReceived.push(msg);
                 });
             });
             await parentFrame.evaluate(() => {
-                window.iframily = window.Iframily.initParent('someId', (msg) => {
+                window.iframily = window.Iframily.initParent('someId', 'dangerouslySetWildcard', (msg) => {
                     if (msg === 'hello from child sync') {
                         return 'parent response sync!';
                     }
@@ -431,6 +431,40 @@ describe('basic', () => {
             disposedCountChild = await helpers.getDisposedCount(constants.FRAME_TYPE_CHILD);
             expect(disposedCountParent).toBe(1);
             expect(disposedCountChild).toBe(1);
+        });
+
+        test('targetOrigin must be specified and must be string', async () => {
+            await helpers.wrapConsoleError(constants.FRAME_TYPE_PARENT);
+
+            let parentFrame = helpers.getFrame(constants.FRAME_TYPE_PARENT);
+            await parentFrame.evaluate(() => {
+                window.Iframily.initParent('someId');
+                window.Iframily.initParent('someId', null);
+                window.Iframily.initParent('someId', '');
+
+                // This check is mostly for backward compatibility with older iframily version where the 2nd argument was the message handler.
+                window.Iframily.initParent('someId', function() {});
+            });
+
+            let errors = await helpers.getConsoleErrors(constants.FRAME_TYPE_PARENT);
+            expect(errors).toHaveLength(4);
+            expect(errors[0][0]).toBe(`[Iframily] - Missing "targetOrigin" argument, not initing "someId" iframily id.`);
+            expect(errors[1][0]).toBe(`[Iframily] - Missing "targetOrigin" argument, not initing "someId" iframily id.`);
+            expect(errors[2][0]).toBe(`[Iframily] - Missing "targetOrigin" argument, not initing "someId" iframily id.`);
+            expect(errors[3][0]).toBe(`[Iframily] - "targetOrigin" is of type function but must be of type string, not initing "someId" iframily id.`);
+        });
+
+        test('cannot use "*" (wildcard) as targetOrigin', async () => {
+            await helpers.wrapConsoleError(constants.FRAME_TYPE_PARENT);
+
+            let parentFrame = helpers.getFrame(constants.FRAME_TYPE_PARENT);
+            await parentFrame.evaluate(() => {
+                window.Iframily.initParent('someId', '*');
+            });
+
+            let errors = await helpers.getConsoleErrors(constants.FRAME_TYPE_PARENT);
+            expect(errors).toHaveLength(1);
+            expect(errors[0][0]).toBe(`[Iframily] - "*" (wildcard) is not allowed for "targetOrigin" argument. If you are sure about what you are doing, use "dangerouslySetWildcard".`);
         });
 
         test('should use targetOrigin if specified', async () => {

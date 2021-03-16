@@ -43,7 +43,7 @@
             }
         }
 
-        let childIFramily = Iframily.initChild('treehouse');
+        let childIFramily = Iframily.initChild('treehouse', window.location.origin);
 
         function sendQuestion() {
             let questions = Object.keys(dialogue);

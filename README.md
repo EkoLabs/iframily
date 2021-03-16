@@ -25,7 +25,11 @@ npm i @ekolabs/iframily --save
 You can also add the library via script tag and use `window.Iframily`, like so:
 
 ```html
+<!-- latest -->
 <script src="https://unpkg.com/@ekolabs/iframily"></script>
+
+<!-- specific version (for example: 1.0.0) -->
+<script src="https://unpkg.com/@ekolabs/iframily@1.0.0"></script>
 ```
 
 ## API
@@ -34,20 +38,20 @@ You can also add the library via script tag and use `window.Iframily`, like so:
 
 Iframily is a singleton and will allow you to initialize parent/child [iframily instances](#----iframily-instance----).
 
-#### `Iframily.initParent(id, msgHandler, options) -> iframily instance`
+#### `Iframily.initParent(id, targetOrigin, msgHandler, options) -> iframily instance`
 
-#### `Iframily.initChild(id, msgHandler, options) -> iframily instance`
+#### `Iframily.initChild(id, targetOrigin, msgHandler, options) -> iframily instance`
 
 Creates a parent/child [iframily instance](#----iframily-instance----) respectively (to be used in the parent/child frame) and returns it, if successful.
 
 | Param           | Type           | Description  |
 | :-------------: |:--------------:| :------------|
 | id | `string` | A unique id to identify this [iframily instance](#----iframily-instance----), this is used in order to match parent and child iframilies. Will abort and log an error if the id already exists in the current frame. |
-| msgHandler | `function` | Optional - A handler for incoming messages from the paired iframily in the parent/child frame. The `msgHandler` can return back a response value or a promise that will be resolved/rejected with a response value.  |
+| targetOrigin | `string` | The URI to use as the target origin for the `postMessage` call. For security concerns this argument is mandatory, see [link](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) for more info. If both frames our on the same origin, you can use `window.location.origin` as the value. Passing "`*`" (wildcard) is not supported, if you are 100% certain that you want to allow messages to be received by everyone, you can pass "`dangerouslySetWildcard`" instead. |
+| msgHandler | `function` | Optional - A handler for incoming messages from the paired iframily in the parent/child frame. The `msgHandler` can return back a response value or a promise that will be resolved/rejected with a response value. |
 | options | `object` | Optional - Additional options, see possible options below: |
 | options.onPairedHandler | `function` | Optional - A handler that will be invoked upon pairing. |
 | options.onDisposedHandler | `function` | Optional - A handler that will be invoked when the instance is disposed. |
-| options.targetOrigin | `URI` | Optional - The URI to use as the target origin for the `postMessage` call. Use this if you are passing sensitive data, see [link](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) for more info. Default is '*'.|
 
 #### `Iframily.isIframilyMessage(event) -> boolean`
 
@@ -110,7 +114,7 @@ let msgHandler = function(msg) {
     console.log('parent got message:', msg);
 };
 
-let iframilyParent = Iframily.initParent('myUniqueId', msgHandler);
+let iframilyParent = Iframily.initParent('myUniqueId', window.location.origin, msgHandler);
 
 iframilyParent.sendMessage('do something')
     .then((response) => {
@@ -130,7 +134,7 @@ iframilyParent.sendMessage('do something async')
 const Iframily = require('@ekolabs/iframily');
 
 let msgHandler = function(msg) {
-    console.log('child got message:', msg);
+    console.log('child got message:', window.location.origin, msg);
 
     if (msg === 'do something') {
         return 'OK! done!';

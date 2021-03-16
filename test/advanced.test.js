@@ -120,13 +120,13 @@ describe('advanced', () => {
         let childFrame = helpers.getFrame(constants.FRAME_TYPE_CHILD);
         await parentFrame.evaluate(() => {
             window.undefinedMessagesReceived = [];
-            window.iframilyUndefinedTest = window.Iframily.initParent('undefined', (msg) => {
+            window.iframilyUndefinedTest = window.Iframily.initParent('undefined', 'dangerouslySetWildcard', (msg) => {
                 window.undefinedMessagesReceived.push(msg);
             });
         });
         await childFrame.evaluate(() => {
             window.undefinedMessagesReceived = [];
-            window.iframilyUndefinedTest = window.Iframily.initChild('undefined', (msg) => {
+            window.iframilyUndefinedTest = window.Iframily.initChild('undefined', 'dangerouslySetWildcard', (msg) => {
                 window.undefinedMessagesReceived.push(msg);
             });
         });
@@ -156,10 +156,10 @@ describe('advanced', () => {
         let parentFrame = helpers.getFrame(constants.FRAME_TYPE_PARENT);
         let childFrame = helpers.getFrame(constants.FRAME_TYPE_CHILD);
         await parentFrame.evaluate(() => {
-            window.iframily = window.Iframily.initParent('someId');
+            window.iframily = window.Iframily.initParent('someId', 'dangerouslySetWildcard');
         });
         await childFrame.evaluate(() => {
-            window.iframily = window.Iframily.initChild('someId');
+            window.iframily = window.Iframily.initChild('someId', 'dangerouslySetWildcard');
         });
 
         await helpers.wrapConsoleError(constants.FRAME_TYPE_PARENT);
@@ -253,7 +253,7 @@ describe('advanced', () => {
             window.removeEventListener('message', window.msgHandler);
 
             window.messagesReceived = [];
-            window.iframily = window.Iframily.initParent('someId', (msg) => {
+            window.iframily = window.Iframily.initParent('someId', 'dangerouslySetWildcard', (msg) => {
                 window.messagesReceived.push(msg);
             });
         });
@@ -261,7 +261,7 @@ describe('advanced', () => {
             window.removeEventListener('message', window.msgHandler);
 
             window.messagesReceived = [];
-            window.iframily = window.Iframily.initChild('someId', (msg) => {
+            window.iframily = window.Iframily.initChild('someId', 'dangerouslySetWildcard', (msg) => {
                 window.messagesReceived.push(msg);
             });
         });
@@ -297,7 +297,7 @@ describe('advanced', () => {
         let stats = fs.lstatSync(bundlePath);
 
         let isDevelopmentBundle = content.toString().includes('/*! DEVELOPMENT BUNDLE */');
-        expect(stats.size).toBeLessThan(isDevelopmentBundle ? 30000 : 12000);
+        expect(stats.size).toBeLessThan(isDevelopmentBundle ? 30000 : 13000);
     });
 
     test('multiple child frames', async () => {
@@ -341,13 +341,13 @@ describe('advanced', () => {
 
         await parentFrame.evaluate(() => {
             window.messagesReceivedFromChild2 = [];
-            window.parentIframily = window.Iframily.initParent('parent-child2', (msg) => {
+            window.parentIframily = window.Iframily.initParent('parent-child2', 'dangerouslySetWildcard', (msg) => {
                 window.messagesReceivedFromChild2.push(msg);
             });
         });
         await child2Frame.evaluate(() => {
             window.messagesReceivedFromChild2Parent = [];
-            window.child2ChildIframily = window.Iframily.initChild('parent-child2', (msg) => {
+            window.child2ChildIframily = window.Iframily.initChild('parent-child2', 'dangerouslySetWildcard', (msg) => {
                 window.messagesReceivedFromChild2Parent.push(msg);
 
                 // Pass down to inner child.
@@ -356,7 +356,7 @@ describe('advanced', () => {
         });
         await child2Frame.evaluate(() => {
             window.messagesReceivedFromChild2InnerChild = [];
-            window.child2ParentIframily = window.Iframily.initParent('child2-child2innerChild', (msg) => {
+            window.child2ParentIframily = window.Iframily.initParent('child2-child2innerChild', 'dangerouslySetWildcard', (msg) => {
                 window.messagesReceivedFromChild2InnerChild.push(msg);
 
                 // Pass up to parent.
@@ -365,7 +365,7 @@ describe('advanced', () => {
         });
         await child2innerChildFrame.evaluate(() => {
             window.messagesReceivedFromChild2InnerChildParent = [];
-            window.child2InnerChildChildIframily = window.Iframily.initChild('child2-child2innerChild', (msg) => {
+            window.child2InnerChildChildIframily = window.Iframily.initChild('child2-child2innerChild', 'dangerouslySetWildcard', (msg) => {
                 window.messagesReceivedFromChild2InnerChildParent.push(msg);
             });
         });
@@ -411,13 +411,13 @@ describe('advanced', () => {
         let parentFrame = helpers.getFrame(constants.FRAME_TYPE_PARENT);
         await parentFrame.evaluate(() => {
             window.parentIframilyMessagesReceived = [];
-            window.parentIframily = window.Iframily.initParent('someId', (msg) => {
+            window.parentIframily = window.Iframily.initParent('someId', 'dangerouslySetWildcard', (msg) => {
                 window.parentIframilyMessagesReceived.push(msg);
             });
         });
         await parentFrame.evaluate(() => {
             window.childIframilyMessagesReceived = [];
-            window.childIframily = window.Iframily.initChild('someId', (msg) => {
+            window.childIframily = window.Iframily.initChild('someId', 'dangerouslySetWildcard', (msg) => {
                 window.childIframilyMessagesReceived.push(msg);
             });
         });

@@ -7,26 +7,55 @@ const constants = require('./constants');
 let parentIframilies = {};
 let childIframilies = {};
 
-module.exports = class Iframily {
-    static initParent(id, msgHandler, options = {}) {
-        if (parentIframilies[id] && !parentIframilies[id].disposed) {
-            // eslint-disable-next-line max-len
-            console.error(`[Iframily] - A parent iframily with id "${id}" was already inited, please use another id or dispose the existing one first.`);
-            return;
-        }
+function validateNotDisposed(id, iframilies, type) {
+    if (iframilies[id] && !iframilies[id].disposed) {
+        // eslint-disable-next-line max-len
+        console.error(`[Iframily] - A ${type} iframily with id "${id}" was already inited, please use another id or dispose the existing one first.`);
+        return false;
+    }
 
-        parentIframilies[id] = new Parent(id, msgHandler, options);
+    return true;
+}
+
+function validateTargetOrigin(targetOrigin, id) {
+    if (!targetOrigin) {
+        console.error(`[Iframily] - Missing "targetOrigin" argument, not initing "${id}" iframily id.`);
+        return false;
+    }
+
+    if (typeof targetOrigin !== 'string') {
+        // eslint-disable-next-line max-len
+        console.error(`[Iframily] - "targetOrigin" is of type ${typeof targetOrigin} but must be of type string, not initing "${id}" iframily id.`);
+        return false;
+    }
+
+    if (targetOrigin === '*') {
+        // eslint-disable-next-line max-len
+        console.error(`[Iframily] - "*" (wildcard) is not allowed for "targetOrigin" argument. If you are sure about what you are doing, use "dangerouslySetWildcard".`);
+        return false;
+    }
+
+    return true;
+}
+
+module.exports = class Iframily {
+    static initParent(id, targetOrigin, msgHandler, options = {}) {
+        /* eslint-disable max-statements-per-line */
+        if (!validateNotDisposed(id, parentIframilies, 'parent')) { return; }
+        if (!validateTargetOrigin(targetOrigin, id)) { return; }
+        /* eslint-enable max-statements-per-line */
+
+        parentIframilies[id] = new Parent(id, targetOrigin, msgHandler, options);
         return parentIframilies[id];
     }
 
-    static initChild(id, msgHandler, options = {}) {
-        if (childIframilies[id] && !childIframilies[id].disposed) {
-            // eslint-disable-next-line max-len
-            console.error(`[Iframily] - A child iframily with id "${id}" was already inited, please use another id or dispose the existing one first.`);
-            return;
-        }
+    static initChild(id, targetOrigin, msgHandler, options = {}) {
+        /* eslint-disable max-statements-per-line */
+        if (!validateNotDisposed(id, childIframilies, 'child')) { return; }
+        if (!validateTargetOrigin(targetOrigin, id)) { return; }
+        /* eslint-enable max-statements-per-line */
 
-        childIframilies[id] = new Child(id, msgHandler, options);
+        childIframilies[id] = new Child(id, targetOrigin, msgHandler, options);
         return childIframilies[id];
     }
 

@@ -71,7 +71,7 @@
                 });
 
                 // Iframily connection between this frame and the top tetris.
-                parentTopIframily = Iframily.initParent('top', (msg) => {
+                parentTopIframily = Iframily.initParent('top', window.location.origin, (msg) => {
                     //console.log('parent top got msg', msg);
 
                     if (msg.action === 'drop') {
@@ -81,7 +81,7 @@
 
                 // Iframily connection between this frame and the bottom tetrises.
                 function initParentBottomIframily(id) {
-                    return Iframily.initParent(id, (msg) => {
+                    return Iframily.initParent(id, window.location.origin, (msg) => {
                         // console.log(`parent for bottom ${id} got msg`, msg);
 
                         if (msg.action === 'lose') {

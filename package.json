@@ -1,6 +1,6 @@
 {
   "name": "@ekolabs/iframily",
-  "version": "0.1.9",
+  "version": "1.0.0",
   "description":"Modern iframes communication",
   "main": "dist/iframily.min.js",
   "license": "Apache-2.0",

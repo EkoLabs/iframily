@@ -13,7 +13,7 @@
         <div style="margin-bottom: 20px;">-> iframily inited in <span class="bold">window.child</span></div>
 
         <script>
-            window.child = window.Iframily.initChild('playground', (msg) => {
+            window.child = window.Iframily.initChild('playground', window.location.origin, (msg) => {
                 console.log('child got message:', msg);
             }, {
                 onPairedHandler: function() { console.log('child paired'); },

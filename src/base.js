@@ -5,18 +5,17 @@ const constants = require('./constants');
 const PUBLIC_METHODS = ['sendMessage', 'dispose'];
 
 module.exports = class Base {
-    constructor(id, msgHandler, options) {
+    constructor(id, targetOrigin, msgHandler, options) {
         this._id = id;
-
+        this._targetOrigin = targetOrigin === 'dangerouslySetWildcard' ? '*' : targetOrigin;
+        this._msgHandler = msgHandler || function() {};
         this._onPairedHandler = options.onPairedHandler || function() {};
         this._onDisposedHandler = options.onDisposedHandler || function() {};
-        this._targetOrigin = options.targetOrigin || '*';
 
         // Identifier for all messages.
         // This will allow us to identify iframily messages and to match parent and child.
         this._iframilyUid = `${constants.FRAMILY_ID_PREFIX}${this._id}`;
 
-        this._msgHandler = msgHandler || function() {};
         this._hasConnected = false;
         this._disposed = false;
 

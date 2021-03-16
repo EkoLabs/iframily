@@ -38,7 +38,7 @@
 
             let currResponseResolve = () => {};
             let currResponseReject = () => {};
-            let parentIframily = Iframily.initParent('treehouse', (msg) => {
+            let parentIframily = Iframily.initParent('treehouse', window.location.origin, (msg) => {
                 console.log('parent got msg:', msg);
 
                 if (msg === 'timeout') {
