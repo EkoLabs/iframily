@@ -1,60 +1,56 @@
-<html>
-    <head>
-        <meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./style/index.css" />
+    <script src="../../dist/iframily.min.js"></script>
+    <script src="./dialogue.js"></script>
+    <script type="text/javascript">
+        let parentIframily = Iframily.initParent('treehouse');
 
-        <title>iframily treehouse</title>
+        document.addEventListener("DOMContentLoaded", ()=>{
+            setupDialogue("root")
+        })
 
-        <style>
-            iframe {
-                margin: 10px;
-            }
-        </style>
-
-        <script src="../../dist/iframily.min.js"></script>
-    </head>
-    <body>
-        <div>PARENT</div>
-        <div id="emojis" style="width:250px"></div>
-        <iframe src="./child.html"></iframe>
-
-        <script>
-            let responses = [
-                '🙂', '😐', '😠', '🤷‍♀️', '❤️', '🍼', '☕',
-                '🍜', '🍺', '🔫', '🗡', '💩', '🕹', '⚰️',
-                '🚽', '🧺', '📉', '💵', '🧪', '🎸', '🏠',
-                '🚿', '🐶', '💊', '🚗', '📺'
-            ];
-
-            // Add all emojis as buttons.
-            let emojisEl = document.querySelector('#emojis');
-            responses.forEach((respEmoji) => {
-                let btn = document.createElement('button');
-                btn.innerText = respEmoji;
-                btn.style.fontSize = '20px';
-                btn.addEventListener('click', onEmojiClicked);
-
-                emojisEl.appendChild(btn);
+        function setupDialogue(dialogueId){
+            // this is the initial dialogue which starts it all
+            let dialogOptions = getDialogueOptions(dialogueId, replyId => {
+                setSelectedMessage(replyId);
+                parentIframily.sendMessage(replyId).then(replyId => setupDialogue(replyId))
             });
+            updateDialogueOptions(dialogOptions);
+        }
 
-            let currResponseResolve = () => {};
-            let currResponseReject = () => {};
-            let parentIframily = Iframily.initParent('treehouse', (msg) => {
-                console.log('parent got msg:', msg);
-
-                if (msg === 'timeout') {
-                    currResponseReject();
-                } else {
-                    return new Promise((resolve, reject) => {
-                        currResponseResolve = resolve;
-                        currResponseReject = reject;
-                    });
-                }
-            });
-
-            function onEmojiClicked(e) {
-                let emoji = e.currentTarget.innerText;
-                currResponseResolve(emoji);
+        function updateDialogueOptions(optionElements){
+            dialogueOptionsContainerEl = document.querySelector(".dialogueOptionsContainer");
+            dialogueOptionsContainerEl.classList.remove("selected0", "selected1", "selected2");
+            dialogueOptionsContainerEl.innerHTML = '';
+            if (optionElements) {
+                optionElements.forEach(optionElement => dialogueOptionsContainerEl.appendChild(optionElement));
             }
-        </script>
-    </body>
+        }
+
+        function setSelectedMessage(replyId){
+            dialogueOptionsContainerEl = document.querySelector(".dialogueOptionsContainer");
+            let optionEl = dialogueOptionsContainerEl.querySelector(`button[data-replyId='${replyId}']`)
+            const optionIndex = [...dialogueOptionsContainerEl.children].indexOf(optionEl);
+            dialogueOptionsContainerEl.classList.add(`selected${optionIndex}`);
+        }
+
+    </script>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Element.prototype.classList"></script>
+</head>
+<body>
+    <div id="fit_container">
+        <div id="aspect_ratio_box">
+            <a href="#" class="logo"><img src="images/iframily_logo.png"/></a>
+            <div class="shoutout">by the <a href="/" class="ekologo">eko <span>Engineering</span></a> team </div>
+            <div id="container">
+                <iframe src="child.html"></iframe>
+                <div class="dialogueOptionsContainer"></div>
+            </div>
+        </div>
+    </div>
+</body>
 </html>

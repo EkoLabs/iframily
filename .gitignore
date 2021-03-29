@@ -3,3 +3,5 @@ npm-debug.log
 .nvmrc
 .vscode
 .idea
+# Local Netlify folder
+.netlify
