@@ -5,12 +5,12 @@
 const constants = require('./constants.js');
 const helpers = require('./helpers.js');
 
-const parentURI = 'http://localhost:9135/test/public/basic/parent.html';
-const childURI = 'http://localhost:9135/test/public/basic/child.html';
+const ORIGIN = 'http://localhost:9135';
+const PARENT_URI = `${ORIGIN}/test/public/basic/parent.html`;
 
 describe('basic', () => {
     beforeEach(async () => {
-        await page.goto(parentURI);
+        await page.goto(PARENT_URI);
 
         helpers.resetFrames();
         helpers.setFrame(page, constants.FRAME_TYPE_PARENT);
@@ -464,12 +464,12 @@ describe('basic', () => {
 
             let errors = await helpers.getConsoleErrors(constants.FRAME_TYPE_PARENT);
             expect(errors).toHaveLength(1);
-            expect(errors[0][0]).toBe(`[Iframily] - "*" (wildcard) is not allowed for "targetOrigin" argument. If you are sure about what you are doing, use "dangerouslySetWildcard".`);
+            expect(errors[0][0]).toBe(`[Iframily] - "*" (wildcard) is not allowed for "targetOrigin" argument. If you are sure about what you are doing, use "DANGEROUSLY_SET_WILDCARD".`);
         });
 
         test('should use targetOrigin if specified', async () => {
-            await helpers.initIframily(constants.FRAME_TYPE_PARENT, { targetOrigin: childURI });
-            await helpers.initIframily(constants.FRAME_TYPE_CHILD, { targetOrigin: parentURI });
+            await helpers.initIframily(constants.FRAME_TYPE_PARENT, { targetOrigin: ORIGIN });
+            await helpers.initIframily(constants.FRAME_TYPE_CHILD, { targetOrigin: ORIGIN });
 
             let pairedCountParent = await helpers.getPairedCount(constants.FRAME_TYPE_PARENT);
             let pairedCountChild = await helpers.getPairedCount(constants.FRAME_TYPE_CHILD);
