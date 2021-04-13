@@ -118,18 +118,18 @@ describe('advanced', () => {
         // NOTE: https://github.com/puppeteer/puppeteer/issues/1510
         let parentFrame = helpers.getFrame(constants.FRAME_TYPE_PARENT);
         let childFrame = helpers.getFrame(constants.FRAME_TYPE_CHILD);
-        await parentFrame.evaluate(() => {
+        await parentFrame.evaluate((DANGEROUSLY_SET_WILDCARD) => {
             window.undefinedMessagesReceived = [];
-            window.iframilyUndefinedTest = window.Iframily.initParent('undefined', 'dangerouslySetWildcard', (msg) => {
+            window.iframilyUndefinedTest = window.Iframily.initParent('undefined', DANGEROUSLY_SET_WILDCARD, (msg) => {
                 window.undefinedMessagesReceived.push(msg);
             });
-        });
-        await childFrame.evaluate(() => {
+        }, constants.DANGEROUSLY_SET_WILDCARD);
+        await childFrame.evaluate((DANGEROUSLY_SET_WILDCARD) => {
             window.undefinedMessagesReceived = [];
-            window.iframilyUndefinedTest = window.Iframily.initChild('undefined', 'dangerouslySetWildcard', (msg) => {
+            window.iframilyUndefinedTest = window.Iframily.initChild('undefined', DANGEROUSLY_SET_WILDCARD, (msg) => {
                 window.undefinedMessagesReceived.push(msg);
             });
-        });
+        }, constants.DANGEROUSLY_SET_WILDCARD);
         await parentFrame.evaluate(() => {
             window.iframilyUndefinedTest.sendMessage(undefined);
         });
@@ -155,12 +155,12 @@ describe('advanced', () => {
     test('unserialiazble message error', async () => {
         let parentFrame = helpers.getFrame(constants.FRAME_TYPE_PARENT);
         let childFrame = helpers.getFrame(constants.FRAME_TYPE_CHILD);
-        await parentFrame.evaluate(() => {
-            window.iframily = window.Iframily.initParent('someId', 'dangerouslySetWildcard');
-        });
-        await childFrame.evaluate(() => {
-            window.iframily = window.Iframily.initChild('someId', 'dangerouslySetWildcard');
-        });
+        await parentFrame.evaluate((DANGEROUSLY_SET_WILDCARD) => {
+            window.iframily = window.Iframily.initParent('someId', DANGEROUSLY_SET_WILDCARD);
+        }, constants.DANGEROUSLY_SET_WILDCARD);
+        await childFrame.evaluate((DANGEROUSLY_SET_WILDCARD) => {
+            window.iframily = window.Iframily.initChild('someId', DANGEROUSLY_SET_WILDCARD);
+        }, constants.DANGEROUSLY_SET_WILDCARD);
 
         await helpers.wrapConsoleError(constants.FRAME_TYPE_PARENT);
         let errorsParent = await helpers.getConsoleErrors(constants.FRAME_TYPE_PARENT);
@@ -249,22 +249,22 @@ describe('advanced', () => {
 
         // FRAMILY
 
-        await parentFrame.evaluate(() => {
+        await parentFrame.evaluate((DANGEROUSLY_SET_WILDCARD) => {
             window.removeEventListener('message', window.msgHandler);
 
             window.messagesReceived = [];
-            window.iframily = window.Iframily.initParent('someId', 'dangerouslySetWildcard', (msg) => {
+            window.iframily = window.Iframily.initParent('someId', DANGEROUSLY_SET_WILDCARD, (msg) => {
                 window.messagesReceived.push(msg);
             });
-        });
-        await childFrame.evaluate(() => {
+        }, constants.DANGEROUSLY_SET_WILDCARD);
+        await childFrame.evaluate((DANGEROUSLY_SET_WILDCARD) => {
             window.removeEventListener('message', window.msgHandler);
 
             window.messagesReceived = [];
-            window.iframily = window.Iframily.initChild('someId', 'dangerouslySetWildcard', (msg) => {
+            window.iframily = window.Iframily.initChild('someId', DANGEROUSLY_SET_WILDCARD, (msg) => {
                 window.messagesReceived.push(msg);
             });
-        });
+        }, constants.DANGEROUSLY_SET_WILDCARD);
 
         let preIframilyParentTime = new Date();
         await parentFrame.evaluate((_messagesAmount) => {
@@ -339,36 +339,36 @@ describe('advanced', () => {
         let child2Frame = helpers.getFrame(constants.FRAME_TYPE_CHILD2);
         let child2innerChildFrame = helpers.getFrame(constants.FRAME_TYPE_CHILD2_INNER_CHILD);
 
-        await parentFrame.evaluate(() => {
+        await parentFrame.evaluate((DANGEROUSLY_SET_WILDCARD) => {
             window.messagesReceivedFromChild2 = [];
-            window.parentIframily = window.Iframily.initParent('parent-child2', 'dangerouslySetWildcard', (msg) => {
+            window.parentIframily = window.Iframily.initParent('parent-child2', DANGEROUSLY_SET_WILDCARD, (msg) => {
                 window.messagesReceivedFromChild2.push(msg);
             });
-        });
-        await child2Frame.evaluate(() => {
+        }, constants.DANGEROUSLY_SET_WILDCARD);
+        await child2Frame.evaluate((DANGEROUSLY_SET_WILDCARD) => {
             window.messagesReceivedFromChild2Parent = [];
-            window.child2ChildIframily = window.Iframily.initChild('parent-child2', 'dangerouslySetWildcard', (msg) => {
+            window.child2ChildIframily = window.Iframily.initChild('parent-child2', DANGEROUSLY_SET_WILDCARD, (msg) => {
                 window.messagesReceivedFromChild2Parent.push(msg);
 
                 // Pass down to inner child.
                 window.child2ParentIframily.sendMessage(msg);
             });
-        });
-        await child2Frame.evaluate(() => {
+        }, constants.DANGEROUSLY_SET_WILDCARD);
+        await child2Frame.evaluate((DANGEROUSLY_SET_WILDCARD) => {
             window.messagesReceivedFromChild2InnerChild = [];
-            window.child2ParentIframily = window.Iframily.initParent('child2-child2innerChild', 'dangerouslySetWildcard', (msg) => {
+            window.child2ParentIframily = window.Iframily.initParent('child2-child2innerChild', DANGEROUSLY_SET_WILDCARD, (msg) => {
                 window.messagesReceivedFromChild2InnerChild.push(msg);
 
                 // Pass up to parent.
                 window.child2ChildIframily.sendMessage(msg);
             });
-        });
-        await child2innerChildFrame.evaluate(() => {
+        }, constants.DANGEROUSLY_SET_WILDCARD);
+        await child2innerChildFrame.evaluate((DANGEROUSLY_SET_WILDCARD) => {
             window.messagesReceivedFromChild2InnerChildParent = [];
-            window.child2InnerChildChildIframily = window.Iframily.initChild('child2-child2innerChild', 'dangerouslySetWildcard', (msg) => {
+            window.child2InnerChildChildIframily = window.Iframily.initChild('child2-child2innerChild', DANGEROUSLY_SET_WILDCARD, (msg) => {
                 window.messagesReceivedFromChild2InnerChildParent.push(msg);
             });
-        });
+        }, constants.DANGEROUSLY_SET_WILDCARD);
 
         await parentFrame.evaluate(() => {
             window.parentIframily.sendMessage('hi from top frame parent');
@@ -409,18 +409,18 @@ describe('advanced', () => {
 
     test('parent and child in same frame will not connect', async () => {
         let parentFrame = helpers.getFrame(constants.FRAME_TYPE_PARENT);
-        await parentFrame.evaluate(() => {
+        await parentFrame.evaluate((DANGEROUSLY_SET_WILDCARD) => {
             window.parentIframilyMessagesReceived = [];
-            window.parentIframily = window.Iframily.initParent('someId', 'dangerouslySetWildcard', (msg) => {
+            window.parentIframily = window.Iframily.initParent('someId', DANGEROUSLY_SET_WILDCARD, (msg) => {
                 window.parentIframilyMessagesReceived.push(msg);
             });
-        });
-        await parentFrame.evaluate(() => {
+        }, constants.DANGEROUSLY_SET_WILDCARD);
+        await parentFrame.evaluate((DANGEROUSLY_SET_WILDCARD) => {
             window.childIframilyMessagesReceived = [];
-            window.childIframily = window.Iframily.initChild('someId', 'dangerouslySetWildcard', (msg) => {
+            window.childIframily = window.Iframily.initChild('someId', DANGEROUSLY_SET_WILDCARD, (msg) => {
                 window.childIframilyMessagesReceived.push(msg);
             });
-        });
+        }, constants.DANGEROUSLY_SET_WILDCARD);
 
         await parentFrame.evaluate(() => {
             window.parentIframily.sendMessage('meow');

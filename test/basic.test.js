@@ -30,16 +30,16 @@ describe('basic', () => {
         test('should get response', async () => {
             let parentFrame = helpers.getFrame(constants.FRAME_TYPE_PARENT);
             let childFrame = helpers.getFrame(constants.FRAME_TYPE_CHILD);
-            await parentFrame.evaluate(() => {
+            await parentFrame.evaluate((DANGEROUSLY_SET_WILDCARD) => {
                 window.messagesReceived = [];
                 window.messageResponses = [];
                 window.messageResponsesCatch = [];
-                window.iframily = window.Iframily.initParent('someId', 'dangerouslySetWildcard', (msg) => {
+                window.iframily = window.Iframily.initParent('someId', DANGEROUSLY_SET_WILDCARD, (msg) => {
                     window.messagesReceived.push(msg);
                 });
-            });
-            await childFrame.evaluate(() => {
-                window.iframily = window.Iframily.initChild('someId', 'dangerouslySetWildcard', (msg) => {
+            }, constants.DANGEROUSLY_SET_WILDCARD);
+            await childFrame.evaluate((DANGEROUSLY_SET_WILDCARD) => {
+                window.iframily = window.Iframily.initChild('someId', DANGEROUSLY_SET_WILDCARD, (msg) => {
                     if (msg === 'hello from parent sync') {
                         return 'child response sync!';
                     }
@@ -62,7 +62,7 @@ describe('basic', () => {
                         });
                     }
                 });
-            });
+            }, constants.DANGEROUSLY_SET_WILDCARD);
 
             // Sync response.
             await parentFrame.evaluate(() => {
@@ -220,16 +220,16 @@ describe('basic', () => {
         test('should get response', async () => {
             let parentFrame = helpers.getFrame(constants.FRAME_TYPE_PARENT);
             let childFrame = helpers.getFrame(constants.FRAME_TYPE_CHILD);
-            await childFrame.evaluate(() => {
+            await childFrame.evaluate((DANGEROUSLY_SET_WILDCARD) => {
                 window.messagesReceived = [];
                 window.messageResponses = [];
                 window.messageResponsesCatch = [];
-                window.iframily = window.Iframily.initChild('someId', 'dangerouslySetWildcard', (msg) => {
+                window.iframily = window.Iframily.initChild('someId', DANGEROUSLY_SET_WILDCARD, (msg) => {
                     window.messagesReceived.push(msg);
                 });
-            });
-            await parentFrame.evaluate(() => {
-                window.iframily = window.Iframily.initParent('someId', 'dangerouslySetWildcard', (msg) => {
+            }, constants.DANGEROUSLY_SET_WILDCARD);
+            await parentFrame.evaluate((DANGEROUSLY_SET_WILDCARD) => {
+                window.iframily = window.Iframily.initParent('someId', DANGEROUSLY_SET_WILDCARD, (msg) => {
                     if (msg === 'hello from child sync') {
                         return 'parent response sync!';
                     }
@@ -252,7 +252,7 @@ describe('basic', () => {
                         });
                     }
                 });
-            });
+            }, constants.DANGEROUSLY_SET_WILDCARD);
 
             // Sync response.
             await childFrame.evaluate(() => {

@@ -31,7 +31,7 @@ function validateTargetOrigin(targetOrigin, id) {
 
     if (targetOrigin === '*') {
         // eslint-disable-next-line max-len
-        console.error(`[Iframily] - "*" (wildcard) is not allowed for "targetOrigin" argument. If you are sure about what you are doing, use "dangerouslySetWildcard".`);
+        console.error(`[Iframily] - "*" (wildcard) is not allowed for "targetOrigin" argument. If you are sure about what you are doing, use "${constants.DANGEROUSLY_SET_WILDCARD}".`);
         return false;
     }
 

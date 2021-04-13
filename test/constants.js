@@ -1,5 +1,7 @@
 'use strict';
 
+const iframilyConstants = require('../src/constants.js');
+
 const FRAME_TYPE_PARENT = 'parent';
 const FRAME_TYPE_CHILD = 'child';
 const FRAME_TYPE_CHILD1 = 'child1';
@@ -18,6 +20,7 @@ const INIT_METHOD_NAMES = {
 };
 
 module.exports = {
+    DANGEROUSLY_SET_WILDCARD: iframilyConstants.DANGEROUSLY_SET_WILDCARD,
     FRAME_TYPE_PARENT,
     FRAME_TYPE_CHILD,
     FRAME_TYPE_CHILD1,

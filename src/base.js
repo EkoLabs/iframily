@@ -7,7 +7,7 @@ const PUBLIC_METHODS = ['sendMessage', 'dispose'];
 module.exports = class Base {
     constructor(id, targetOrigin, msgHandler, options) {
         this._id = id;
-        this._targetOrigin = targetOrigin === 'dangerouslySetWildcard' ? '*' : targetOrigin;
+        this._targetOrigin = targetOrigin === constants.DANGEROUSLY_SET_WILDCARD ? '*' : targetOrigin;
         this._msgHandler = msgHandler || function() {};
         this._onPairedHandler = options.onPairedHandler || function() {};
         this._onDisposedHandler = options.onDisposedHandler || function() {};
