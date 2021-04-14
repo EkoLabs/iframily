@@ -17,6 +17,11 @@ module.exports = class Parent extends Base {
             return;
         }
 
+        // Ignore messages sent from the current window to avoid child connections that are in the same frame.
+        if (event.source === window) {
+            return;
+        }
+
         let eventData = event && event.data;
 
         // Only handle this iframily message (according id) and originating from child.
@@ -27,27 +32,19 @@ module.exports = class Parent extends Base {
                 // Child might still be sending connection init messages even though
                 // we already started the connection process, ignore them.
                 if (!this._hasConnected) {
-                    // Find the IFrame that sent this event using 'event.source'.
-                    // NOTE: This get only the top level IFrames (which is good).
-                    let iframes = document.getElementsByTagName('iframe');
-                    for (let i = 0; i < iframes.length; i++) {
-                        if (iframes[i].contentWindow === event.source) {
-                            this._targetWindow = iframes[i].contentWindow;
+                    this._targetWindow = event.source;
 
-                            // Set that we are connected and send init successful message.
-                            // NOTE: Setting connected first is important in order for the message to be sent.
-                            this._hasConnected = true;
+                    // Set that we are connected and send init successful message.
+                    // NOTE: Setting connected first is important in order for the message to be sent.
+                    this._hasConnected = true;
 
-                            this._onPairedHandler();
+                    this._onPairedHandler();
 
-                            // NOTE: Sending the 'init successful' event before sending queued messages is also important
-                            // NOTE: in order for child to be connected before receiving messages.
-                            this._sendMessage(constants.FRAMILY_INIT_SUCCESSFUL);
+                    // NOTE: Sending the 'init successful' event before sending queued messages is also important
+                    // NOTE: in order for child to be connected before receiving messages.
+                    this._sendMessage(constants.FRAMILY_INIT_SUCCESSFUL);
 
-                            this._sendQueuedMessages();
-                            break;
-                        }
-                    }
+                    this._sendQueuedMessages();
                 }
             } else if (this._hasConnected) {
                 super._handleMessage(eventData);
