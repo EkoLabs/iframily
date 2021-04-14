@@ -2,8 +2,8 @@
 /* eslint-disable no-magic-numbers */
 'use strict';
 
-const constants = require('./constants.js');
-const helpers = require('./helpers.js');
+const constants = require('./constants');
+const helpers = require('./helpers');
 
 const ORIGIN = 'http://localhost:9135';
 const PARENT_URI = `${ORIGIN}/test/public/basic/parent.html`;

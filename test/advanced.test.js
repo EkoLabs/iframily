@@ -6,8 +6,8 @@ const fs = require('fs');
 const path = require('path');
 const _ = require('lodash');
 
-const constants = require('./constants.js');
-const helpers = require('./helpers.js');
+const constants = require('./constants');
+const helpers = require('./helpers');
 
 describe('advanced', () => {
     beforeEach(async () => {

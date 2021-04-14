@@ -1,6 +1,6 @@
 'use strict';
 
-const constants = require('./constants.js');
+const constants = require('./constants');
 
 let framesMap = {};
 function resetFrames() {

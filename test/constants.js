@@ -1,6 +1,6 @@
 'use strict';
 
-const iframilyConstants = require('../src/constants.js');
+const iframilyConstants = require('../src/constants');
 
 const FRAME_TYPE_PARENT = 'parent';
 const FRAME_TYPE_CHILD = 'child';
