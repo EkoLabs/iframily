@@ -297,7 +297,7 @@ describe('advanced', () => {
         let stats = fs.lstatSync(bundlePath);
 
         let isDevelopmentBundle = content.toString().includes('/*! DEVELOPMENT BUNDLE */');
-        expect(stats.size).toBeLessThan(isDevelopmentBundle ? 30000 : 13000);
+        expect(stats.size).toBeLessThan(isDevelopmentBundle ? 31000 : 13000);
     });
 
     test('multiple child frames', async () => {
