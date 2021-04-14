@@ -492,6 +492,19 @@ describe('basic', () => {
             expect(pairedCountChild).toBe(0);
         });
 
+        test('cannot init child in top frame', async () => {
+            await helpers.wrapConsoleError(constants.FRAME_TYPE_PARENT);
+
+            let parentFrame = helpers.getFrame(constants.FRAME_TYPE_PARENT);
+            await parentFrame.evaluate((DANGEROUSLY_SET_WILDCARD) => {
+                window.Iframily.initChild('someId', DANGEROUSLY_SET_WILDCARD);
+            }, constants.DANGEROUSLY_SET_WILDCARD);
+
+            let errors = await helpers.getConsoleErrors(constants.FRAME_TYPE_PARENT);
+            expect(errors).toHaveLength(1);
+            expect(errors[0][0]).toBe(`[Iframily] - Attempted to init a child iframily in a non embedded window, not initing "someId" iframily id.`);
+        });
+
         test('should identify iframily messages using isIframilyMessage()', async () => {
             let parentFrame = helpers.getFrame(constants.FRAME_TYPE_PARENT);
             let childFrame = helpers.getFrame(constants.FRAME_TYPE_CHILD);

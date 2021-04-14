@@ -7,7 +7,7 @@ const constants = require('./constants');
 let parentIframilies = {};
 let childIframilies = {};
 
-function validateNotDisposed(id, iframilies, type) {
+function validateIdAvailable(id, iframilies, type) {
     if (iframilies[id] && !iframilies[id].disposed) {
         // eslint-disable-next-line max-len
         console.error(`[Iframily] - A ${type} iframily with id "${id}" was already inited, please use another id or dispose the existing one first.`);
@@ -38,10 +38,20 @@ function validateTargetOrigin(targetOrigin, id) {
     return true;
 }
 
+function validateInFrame(id) {
+    if (window.parent === window) {
+        // eslint-disable-next-line max-len
+        console.error(`[Iframily] - Attempted to init a child iframily in a non embedded window, not initing "${id}" iframily id.`);
+        return false;
+    }
+
+    return true;
+}
+
 module.exports = class Iframily {
     static initParent(id, targetOrigin, msgHandler, options = {}) {
         /* eslint-disable max-statements-per-line */
-        if (!validateNotDisposed(id, parentIframilies, 'parent')) { return; }
+        if (!validateIdAvailable(id, parentIframilies, 'parent')) { return; }
         if (!validateTargetOrigin(targetOrigin, id)) { return; }
         /* eslint-enable max-statements-per-line */
 
@@ -51,8 +61,9 @@ module.exports = class Iframily {
 
     static initChild(id, targetOrigin, msgHandler, options = {}) {
         /* eslint-disable max-statements-per-line */
-        if (!validateNotDisposed(id, childIframilies, 'child')) { return; }
+        if (!validateIdAvailable(id, childIframilies, 'child')) { return; }
         if (!validateTargetOrigin(targetOrigin, id)) { return; }
+        if (!validateInFrame(id)) { return; }
         /* eslint-enable max-statements-per-line */
 
         childIframilies[id] = new Child(id, targetOrigin, msgHandler, options);
