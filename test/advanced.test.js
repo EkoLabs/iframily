@@ -408,21 +408,23 @@ describe('advanced', () => {
     });
 
     test('parent and child in same frame will not connect', async () => {
-        let parentFrame = helpers.getFrame(constants.FRAME_TYPE_PARENT);
-        await parentFrame.evaluate((DANGEROUSLY_SET_WILDCARD) => {
+        // NOTE: Using child frame since initing a child in the top frame is not allowed.
+        let childFrame = helpers.getFrame(constants.FRAME_TYPE_CHILD);
+
+        await childFrame.evaluate((DANGEROUSLY_SET_WILDCARD) => {
             window.parentIframilyMessagesReceived = [];
             window.parentIframily = window.Iframily.initParent('someId', DANGEROUSLY_SET_WILDCARD, (msg) => {
                 window.parentIframilyMessagesReceived.push(msg);
             });
         }, constants.DANGEROUSLY_SET_WILDCARD);
-        await parentFrame.evaluate((DANGEROUSLY_SET_WILDCARD) => {
+        await childFrame.evaluate((DANGEROUSLY_SET_WILDCARD) => {
             window.childIframilyMessagesReceived = [];
             window.childIframily = window.Iframily.initChild('someId', DANGEROUSLY_SET_WILDCARD, (msg) => {
                 window.childIframilyMessagesReceived.push(msg);
             });
         }, constants.DANGEROUSLY_SET_WILDCARD);
 
-        await parentFrame.evaluate(() => {
+        await childFrame.evaluate(() => {
             window.parentIframily.sendMessage('meow');
             window.childIframily.sendMessage('meow');
         });
@@ -431,7 +433,7 @@ describe('advanced', () => {
             setTimeout(resolve, 1000);
         });
 
-        let messagesReceivedArr = await parentFrame.evaluate(() => {
+        let messagesReceivedArr = await childFrame.evaluate(() => {
             return [window.parentIframilyMessagesReceived, window.childIframilyMessagesReceived];
         });
 
