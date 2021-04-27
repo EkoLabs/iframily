@@ -1,0 +1,201 @@
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap");
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0; }
+
+body {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom, #7bcdcb 0%, #7bcdcb 50%, #b3c636 50%, #b3c636 100%);
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', sans-serif; }
+
+*:focus:not(.focus-visible) {
+  outline: none; }
+
+#fit_container {
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 1200px; }
+
+#aspect_ratio_box {
+  height: 0;
+  overflow: hidden;
+  padding-bottom: 54.16313%;
+  width: 100%;
+  position: relative; }
+
+#container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url(../images/background.jpg);
+  background-size: 100% 100%;
+  background-repeat: no-repeat; }
+
+.logo {
+  position: absolute;
+  display: block;
+  width: 133px;
+  height: 133px;
+  left: 84px;
+  top: 112px;
+  z-index: 10; }
+
+.logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; }
+
+.shoutout {
+  position: absolute;
+  z-index: 10;
+  right: 25px;
+  bottom: 5px;
+  width: 500px;
+  color: white;
+  font-size: 14px; }
+
+.shoutout a.ekologo {
+  position: relative;
+  top: 4px;
+  color: rgba(255, 255, 255, 0);
+  font-size: 30px;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-image: url(../images/ekoengineering_logo.svg);
+  margin: 0 6px; }
+
+.shoutout a.ekologo span {
+  padding-left: 5px;
+  font-size: 16px; }
+
+iframe {
+  position: absolute;
+  top: 11.6%;
+  left: 33%;
+  width: 27.3%;
+  height: 45.3%; }
+
+.dialogueOptionsContainer {
+  position: absolute;
+  left: 65%;
+  top: 15%; }
+
+.dialogueOptionsContainer button {
+  min-height: 50px;
+  border: none;
+  text-align: left;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.15s ease-in;
+  margin-bottom: 25px;
+  position: absolute;
+  top: 0;
+  left: 0; }
+
+.dialogueOptionsContainer button:hover {
+  filter: brightness(1.1); }
+
+.dialogueOptionsContainer button span {
+  display: block;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'Amatic SC', cursive;
+  font-size: 28px;
+  color: white;
+  z-index: 5;
+  padding: 10px 20px;
+  font-weight: bold;
+  min-width: 200px;
+  max-width: 400px; }
+
+.dialogueOptionsContainer button span:before, .dialogueOptionsContainer button span:after {
+  bottom: -41px;
+  left: 14%;
+  border: solid transparent;
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-top-color: #52b3b5;
+  border-width: 25px;
+  margin-left: -25px;
+  transform: scaleX(0.3) scaleY(0.7) skewX(-24deg);
+  z-index: 3;
+  opacity: 0;
+  transition: 0.15s ease-in all; }
+
+.dialogueOptionsContainer button span:after {
+  bottom: -46px;
+  border-top-color: #037777;
+  z-index: 2; }
+
+.dialogueOptionsContainer button:before, .dialogueOptionsContainer button:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 30px;
+  border-bottom-left-radius: 5px; }
+
+.dialogueOptionsContainer button:before {
+  background: #52b3b5;
+  z-index: 2; }
+
+.dialogueOptionsContainer button:after {
+  top: 4px;
+  background-color: #037777;
+  z-index: 1; }
+
+.dialogueOptionsContainer button:nth-child(1) {
+  transform: translateY(0px); }
+
+.dialogueOptionsContainer button:nth-child(2) {
+  transform: translateY(85px); }
+
+.dialogueOptionsContainer button:nth-child(3) {
+  transform: translateY(170px); }
+
+.dialogueOptionsContainer.selected0 button, .dialogueOptionsContainer.selected1 button, .dialogueOptionsContainer.selected2 button {
+  opacity: 0;
+  pointer-events: none; }
+
+.dialogueOptionsContainer.selected0 button:nth-child(1) {
+  transform: translateY(170px);
+  opacity: 1; }
+
+.dialogueOptionsContainer.selected0 button:nth-child(1) span:before, .dialogueOptionsContainer.selected0 button:nth-child(1) span:after {
+  opacity: 1; }
+
+.dialogueOptionsContainer.selected1 button:nth-child(2) {
+  transform: translateY(170px);
+  opacity: 1;
+  pointer-events: none; }
+
+.dialogueOptionsContainer.selected1 button:nth-child(2) span:before, .dialogueOptionsContainer.selected1 button:nth-child(2) span:after {
+  opacity: 1; }
+
+.dialogueOptionsContainer.selected2 button:nth-child(3) {
+  transform: translateY(170px);
+  opacity: 1; }
+
+.dialogueOptionsContainer.selected2 button:nth-child(3) span:before, .dialogueOptionsContainer.selected2 button:nth-child(3) span:after {
+  opacity: 1; }

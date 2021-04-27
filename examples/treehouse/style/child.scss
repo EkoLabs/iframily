@@ -1,0 +1,152 @@
+body{
+  margin: 0;
+  padding: 0;
+  background: url(../images/iframe_background.jpg);
+  background-size: cover;
+  overflow: hidden;
+}
+
+*:focus:not(.focus-visible) {
+  outline: none;
+}
+
+.dialogueOptionsContainer{
+  position: absolute;
+  left: 5%;
+  top: 6%;
+}
+
+
+.dialogueOptionsContainer button{
+  min-height: 50px;
+  border: none;
+  text-align: left;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.15s ease-in;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  &:hover{
+    filter: brightness(0.9);
+  }
+
+  span{
+    display: block;
+    position: relative;
+    top: 0;
+    left: 0;
+    font-family: 'Amatic SC', cursive;
+    font-size: 24px;
+    color: #4d4d4d;
+    z-index: 5;
+    padding: 10px 20px;
+    font-weight: bold;
+    min-width: 200px;
+    max-width: 350px;
+
+    &:before, &:after{
+      bottom: -41px;
+      right: 14%;
+      border: solid transparent;
+      content: "";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+      border-top-color: #e6e6e6;
+      border-width: 25px;
+      margin-left: -25px;
+      transform: scaleX(0.3) scaleY(0.7) skewX(24deg);
+      z-index: 3;
+      opacity: 0;
+      transition: 0.15s ease-in all;
+    }
+
+    &:after {
+      bottom: -46px;
+      border-top-color: #4d4d4d;
+      z-index: 2;
+    }
+
+  }
+
+
+  &:before, &:after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 5px;
+  }
+
+  &:before{
+    background: #e6e6e6;
+    z-index: 2;
+  }
+
+  &:after{
+    top: 4px;
+    background-color: #4d4d4d;
+    z-index: 1;
+  }
+
+  &:nth-child(1){
+    transform: translateY(0px);
+  }
+
+  &:nth-child(2){
+    transform: translateY(85px);
+  }
+
+  &:nth-child(3){
+    transform: translateY(170px);
+  }
+}
+
+.dialogueOptionsContainer.selected0, .dialogueOptionsContainer.selected1, .dialogueOptionsContainer.selected2{
+  button{
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.dialogueOptionsContainer.selected0{
+  button:nth-child(1){
+    transform: translateY(58px) translateX(79px);
+    opacity: 1;
+
+    span:before, span:after{
+      opacity: 1;
+    }
+  }
+}
+
+.dialogueOptionsContainer.selected1{
+  button:nth-child(2){
+    transform: translateY(58px) translateX(79px);
+    opacity: 1;
+    pointer-events: none;
+
+    span:before, span:after{
+      opacity: 1;
+    }
+  }
+}
+
+.dialogueOptionsContainer.selected2{
+  button:nth-child(3){
+    transform: translateY(58px) translateX(79px);
+    opacity: 1;
+
+    span:before, span:after{
+      opacity: 1;
+    }
+  }
+}

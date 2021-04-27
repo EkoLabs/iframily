@@ -1,85 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-
-    <title>iframily treehouse</title>
-
-    <style>
-    </style>
-
+    <link rel="stylesheet" href="./style/child.css" />
     <script src="../../dist/iframily.min.js"></script>
-</head>
-<body>
-    <div>CHILD</div>
-    <button onclick="sendQuestion()">SEND RANDOM QUESTION</button>
-    <div id="dialogue" style="margin-top: 10px"></div>
+    <script src="./dialogue.js"></script>
 
-    <script>
-        let dialogueEl = document.querySelector('#dialogue');
+    <script type="text/javascript">
+         Iframily.initChild('treehouse', window.location.origin, (msg) => {
+            console.log('child got msg:', msg);
 
-        let dialogue = {
-            'Why aren\'t there any more dinosaurs?': {
-                '🙂': 'They became extinct millions of years ago?',
-                '🧪': 'They became extinct millions of years ago?',
+            return new Promise((resolve, reject) => {
+                let dialogOptions = getDialogueOptions(msg, replyId => {
+                    setSelectedMessage(replyId);
+                    resolve(replyId);
+                });
+                updateDialogueOptions(dialogOptions);
+            });
+        });
 
-                '😐': 'What? What happened to them?',
-                '🤷‍♀️': 'What? What happened to them?',
-
-                '😠': 'What do you mean “we killed them all”?',
-                '🔫': 'What do you mean “we killed them all”?',
-                '⚰️': 'What do you mean “we killed them all”?',
-                '🗡': 'What do you mean “we killed them all”?',
-
-                '🍜': 'What do you mean “we ate them all”???',
-                '🍼': 'What do you mean “we ate them all”???',
-
-                '🐶': 'They became dogs? really?',
-
-                '🚗': 'What do you mean “they drove away”?',
-
-                default: '...what?',
-                timeout: 'Well I guess we’ll never know'
+        function updateDialogueOptions(optionElements){
+            dialogueOptionsContainerEl = document.querySelector(".dialogueOptionsContainer");
+            dialogueOptionsContainerEl.classList.remove("selected0", "selected1", "selected2");
+            dialogueOptionsContainerEl.innerHTML = '';
+            if (optionElements) {
+                optionElements.forEach(optionElement => dialogueOptionsContainerEl.appendChild(optionElement));
             }
         }
 
-        let childIFramily = Iframily.initChild('treehouse', window.location.origin);
 
-        function sendQuestion() {
-            let questions = Object.keys(dialogue);
-            let currQuestion = questions[Math.floor(Math.random() * questions.length)];
-
-            let timeoutID;
-            childIFramily.sendMessage(currQuestion)
-                .then((resp) => {
-                    console.log('child got response:', resp);
-
-                    window.clearTimeout(timeoutID);
-
-                    dialogueEl.innerText += `\n p: ${resp}`;
-
-                    let responses = dialogue[currQuestion];
-                    let responseOfTheResponse = responses[resp] || responses.default;
-
-                    // Just to make it more real...
-                    setTimeout(() => {
-                        console.log(responseOfTheResponse);
-                        dialogueEl.innerText += `\n c: ${responseOfTheResponse}`;
-                    }, 2000);
-                })
-                .catch(() => {
-                    console.log('child timeout!');
-
-                    let responses = dialogue[currQuestion];
-                    let responseOfTheResponse = responses.timeout;
-                    dialogueEl.innerText += `\n c: ${responseOfTheResponse}`;
-                });
-
-            dialogueEl.innerText = ` c: ${currQuestion}`;
-
-            timeoutID = window.setTimeout(() => {
-                childIFramily.sendMessage('timeout');
-            }, 3000);
-        }
+         function setSelectedMessage(replyId){
+             dialogueOptionsContainerEl = document.querySelector(".dialogueOptionsContainer");
+             let optionEl = dialogueOptionsContainerEl.querySelector(`button[data-replyId='${replyId}']`)
+             const optionIndex = [...dialogueOptionsContainerEl.children].indexOf(optionEl);
+             dialogueOptionsContainerEl.classList.add(`selected${optionIndex}`);
+         }
     </script>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Element.prototype.classList"></script>
+</head>
+<body>
+    <div class="dialogueOptionsContainer"></div>
+
 </body>
+</html>
