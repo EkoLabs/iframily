@@ -29,7 +29,7 @@ describe('advanced', () => {
         await helpers.initIframily(constants.FRAME_TYPE_PARENT);
         errorsParent = await helpers.getConsoleErrors(constants.FRAME_TYPE_PARENT);
         expect(errorsParent).toHaveLength(1);
-        expect(errorsParent[0][0]).toBe(`[Iframily] - A parent iframily with id "${constants.DEFAULT_FRAMILY_ID}" was already inited, please use another id or dispose the existing one first.`);
+        expect(errorsParent[0][0]).toBe(`[Iframily] - A parent iframily with id "${constants.DEFAULT_FRAMILY_ID}" was already initialized, please use another id or dispose the existing one first.`);
 
         let errorsChild = await helpers.getConsoleErrors(constants.FRAME_TYPE_CHILD);
         expect(errorsChild).toHaveLength(0);
@@ -38,7 +38,7 @@ describe('advanced', () => {
         await helpers.initIframily(constants.FRAME_TYPE_CHILD);
         errorsChild = await helpers.getConsoleErrors(constants.FRAME_TYPE_CHILD);
         expect(errorsChild).toHaveLength(1);
-        expect(errorsChild[0][0]).toBe(`[Iframily] - A child iframily with id "${constants.DEFAULT_FRAMILY_ID}" was already inited, please use another id or dispose the existing one first.`);
+        expect(errorsChild[0][0]).toBe(`[Iframily] - A child iframily with id "${constants.DEFAULT_FRAMILY_ID}" was already initialized, please use another id or dispose the existing one first.`);
     });
 
     test('can create iframilies using disposed iframilies ids', async () => {
@@ -408,7 +408,7 @@ describe('advanced', () => {
     });
 
     test('parent and child in same frame will not connect', async () => {
-        // NOTE: Using child frame since initing a child in the top frame is not allowed.
+        // NOTE: Using child frame since initializing a child in the top frame is not allowed.
         let childFrame = helpers.getFrame(constants.FRAME_TYPE_CHILD);
 
         await childFrame.evaluate((DANGEROUSLY_SET_WILDCARD) => {

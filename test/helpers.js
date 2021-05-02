@@ -94,7 +94,7 @@ function isDisposed(type, options = {}) {
     let frame = framesMap[type];
 
     return frame.evaluate((_iframilyVarName) => {
-        return window[_iframilyVarName].disposed;
+        return window[_iframilyVarName].isDisposed;
     }, iframilyVarName);
 }
 

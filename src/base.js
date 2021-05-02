@@ -17,7 +17,7 @@ module.exports = class Base {
         this._iframilyUid = `${constants.FRAMILY_ID_PREFIX}${this._id}`;
 
         this._hasConnected = false;
-        this._disposed = false;
+        this._isDisposed = false;
 
         // Queue for messages requested to be sent before connection was made.
         this._msgQueue = [];
@@ -79,8 +79,8 @@ module.exports = class Base {
         if (this._hasConnected || options.forceSend) {
             this._postMessage(wrappedMsg);
         } else {
-            // eslint-disable-next-line no-console
-            console.warn('[Iframily] - No one connected yet, queuing message:', msg);
+            // eslint-disable-next-line no-console, max-len
+            console.warn(`[Iframily] - No one paired yet, queuing message sent by ${this._iframilyType} id: ${this._id}`);
             this._msgQueue.push(this._postMessage.bind(this, wrappedMsg));
         }
     }
@@ -125,7 +125,8 @@ module.exports = class Base {
             } else if (wrappedMsg._isRejected) {
                 cbDefer.reject(wrappedMsg._cbRejectError);
             } else {
-                throw new Error(`Missing resolve/reject information on response: ${wrappedMsg}`);
+                // eslint-disable-next-line max-len
+                throw new Error(`[Iframily] - Missing resolve/reject information on response sent by ${wrappedMsg._fromType} id: ${wrappedMsg._iframilyUid}`);
             }
 
             // Cleanup.
@@ -142,7 +143,7 @@ module.exports = class Base {
     // #region MAIN API
 
     sendMessage(msg) {
-        if (this._disposed) {
+        if (this._isDisposed) {
             return this._displayDisposedError();
         }
 
@@ -153,19 +154,19 @@ module.exports = class Base {
 
     /* NOTE: overridden in extending class */
     dispose() {
-        if (this._disposed) {
+        if (this._isDisposed) {
             return this._displayDisposedError();
         }
 
         this._hasConnected = false;
         this._msgQueue = [];
 
-        this._disposed = true;
+        this._isDisposed = true;
         this._onDisposedHandler();
     }
 
-    get disposed() {
-        return this._disposed;
+    get isDisposed() {
+        return this._isDisposed;
     }
 
     get id() {

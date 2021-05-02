@@ -161,7 +161,7 @@ describe('basic', () => {
         });
 
         describe('multiple child with different ids', () => {
-            test('should send to correct child id (child that should receive the messages was inited first).', async () => {
+            test('should send to correct child id (child that should receive the messages was initialized first).', async () => {
                 await helpers.initIframily(constants.FRAME_TYPE_PARENT, {
                     id: 'testId-1'
                 });
@@ -183,7 +183,7 @@ describe('basic', () => {
                 expect(messagesFromParentChild2).toHaveLength(0);
             });
 
-            test('should send to correct child id (child that should receive the messages was inited second).', async () => {
+            test('should send to correct child id (child that should receive the messages was initialized second).', async () => {
                 await helpers.initIframily(constants.FRAME_TYPE_PARENT, {
                     id: 'testId-1'
                 });
@@ -351,7 +351,7 @@ describe('basic', () => {
         });
 
         describe('multiple parent with different ids', () => {
-            test('should send to correct parent id (parent that should receive the messages was inited first).', async () => {
+            test('should send to correct parent id (parent that should receive the messages was initialized first).', async () => {
                 await helpers.initIframily(constants.FRAME_TYPE_CHILD, {
                     id: 'testId-1'
                 });
@@ -373,7 +373,7 @@ describe('basic', () => {
                 expect(messagesFromChildParent2).toHaveLength(0);
             });
 
-            test('should send to correct parent id (parent that should receive the messages was inited second).', async () => {
+            test('should send to correct parent id (parent that should receive the messages was initialized second).', async () => {
                 await helpers.initIframily(constants.FRAME_TYPE_CHILD, {
                     id: 'testId-1'
                 });
@@ -448,10 +448,10 @@ describe('basic', () => {
 
             let errors = await helpers.getConsoleErrors(constants.FRAME_TYPE_PARENT);
             expect(errors).toHaveLength(4);
-            expect(errors[0][0]).toBe(`[Iframily] - Missing "targetOrigin" argument, not initing "someId" iframily id.`);
-            expect(errors[1][0]).toBe(`[Iframily] - Missing "targetOrigin" argument, not initing "someId" iframily id.`);
-            expect(errors[2][0]).toBe(`[Iframily] - Missing "targetOrigin" argument, not initing "someId" iframily id.`);
-            expect(errors[3][0]).toBe(`[Iframily] - "targetOrigin" is of type function but must be of type string, not initing "someId" iframily id.`);
+            expect(errors[0][0]).toBe(`[Iframily] - Missing "targetOrigin" argument, not initializing "someId" iframily id.`);
+            expect(errors[1][0]).toBe(`[Iframily] - Missing "targetOrigin" argument, not initializing "someId" iframily id.`);
+            expect(errors[2][0]).toBe(`[Iframily] - Missing "targetOrigin" argument, not initializing "someId" iframily id.`);
+            expect(errors[3][0]).toBe(`[Iframily] - "targetOrigin" is of type function but must be of type string, not initializing "someId" iframily id.`);
         });
 
         test('cannot use "*" (wildcard) as targetOrigin', async () => {
@@ -464,7 +464,7 @@ describe('basic', () => {
 
             let errors = await helpers.getConsoleErrors(constants.FRAME_TYPE_PARENT);
             expect(errors).toHaveLength(1);
-            expect(errors[0][0]).toBe(`[Iframily] - "*" (wildcard) is not allowed for "targetOrigin" argument. If you are sure about what you are doing, use "DANGEROUSLY_SET_WILDCARD".`);
+            expect(errors[0][0]).toBe(`[Iframily] - "*" (wildcard) is not allowed for "targetOrigin" argument. If you are sure about what you are doing, use "${constants.DANGEROUSLY_SET_WILDCARD}". See more info here: ${constants.README_SINGLETON_URL}`);
         });
 
         test('should use targetOrigin if specified', async () => {
@@ -502,7 +502,7 @@ describe('basic', () => {
 
             let errors = await helpers.getConsoleErrors(constants.FRAME_TYPE_PARENT);
             expect(errors).toHaveLength(1);
-            expect(errors[0][0]).toBe(`[Iframily] - Attempted to init a child iframily in a non embedded window, not initing "someId" iframily id.`);
+            expect(errors[0][0]).toBe(`[Iframily] - Attempted to initialize a child iframily in a non embedded window, not initializing "someId" iframily id.`);
         });
 
         test('should identify iframily messages using isIframilyMessage()', async () => {

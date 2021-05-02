@@ -47,7 +47,7 @@ Creates a parent/child [iframily instance](#----iframily-instance----) respectiv
 | Param           | Type           | Description  |
 | :-------------: |:--------------:| :------------|
 | id | `string` | A unique id to identify this [iframily instance](#----iframily-instance----), this is used in order to match parent and child iframilies. Will abort and log an error if the id already exists in the current frame. |
-| targetOrigin | `string` | The URI to use as the target origin for the `postMessage` call. For security concerns this argument is mandatory, see [link](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) for more info. If both frames our on the same origin, you can use `window.location.origin` as the value. Passing `"*"` (wildcard) is not supported, if you are 100% certain that you want to allow messages to be received by everyone, you can pass `"DANGEROUSLY_SET_WILDCARD"` instead. |
+| targetOrigin | `string` | The URI to use as the target origin for the `postMessage` call and for validating the sender origin on incoming messages, for example: `https://subdomain.domain.com`. For security concerns this argument is mandatory, see [link](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) for more info. If both frames our on the same origin, you can use `window.location.origin` as the value. Passing `"*"` (wildcard) is not supported, if you are 100% certain that you want to allow messages to be received and handled by everyone, you can pass `"DANGEROUSLY_SET_WILDCARD"` instead. |
 | msgHandler | `function` | Optional - A handler for incoming messages from the paired iframily in the parent/child frame. The `msgHandler` can return back a response value or a promise that will be resolved/rejected with a response value. |
 | options | `object` | Optional - Additional options, see possible options below: |
 | options.onPairedHandler | `function` | Optional - A handler that will be invoked upon pairing. |
@@ -73,7 +73,7 @@ function receiveMessage(event) {
 
 ### --- iframily instance ---
 
-The iframily instance is the object returned when initing a new iframily using the `initParent()` or `initChild()` methods.
+The iframily instance is the object returned when initializing a new iframily using the `initParent()` or `initChild()` methods.
 
 #### `f.sendMessage(msg) -> Promise`
 
@@ -81,7 +81,7 @@ The iframily instance is the object returned when initing a new iframily using t
 | :-------------: |:--------------:| :------------|
 | msg             | `serializable` | The message to be sent, can be any serializable (see [structured clone algorithm](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm)).
 
-Returns a promise that will be resolved with the response value from the receiving iframily instance message handler. The promise will be rejected if the receiving iframily instance returned a rejected promise.
+Returns a promise that will be resolved with the response value from the receiving iframily instance message handler. The promise will be rejected if the promised returned by the receiving iframily instance rejects.
 
 > if the receiving iframily instance did not return an explicit response value in its message handler, the promise will be resolved with `undefined`.
 
@@ -90,17 +90,17 @@ Returns a promise that will be resolved with the response value from the receivi
 Dispose of the iframily instance, making it obsolete.
 
 > * You cannot reuse a disposed instance, you can however create a new instance with the same id.
-> * Any iframilies paired with this instance will still keep sending messages to the disposed instance but they will be ignored.
+> * Any iframilies paired with this instance will still be able to keep sending messages to the disposed instance but the messages will be ignored by the disposed target.
 
 This method is useful when you have a parent frame which recreates the same child frame and you want to use the same id for the iframilies.
 
-#### `f.disposed -> boolean (read only)`
+#### `f.isDisposed -> boolean (read only)`
 
 Returns `true` if this iframily instance has been disposed.
 
 #### `f.id -> string (read only)`
 
-Returns the id that this iframily was inited with.
+Returns the id that this iframily was initialized with.
 
 ## Usage example
 
@@ -155,7 +155,7 @@ iframilyChild.sendMessage({ text: 'fancy' });
 ## Notes
 
 * You can create multiple iframilies in each frame but the unique ids cannot be used more than once per frame (unless the previous one has been disposed).
-* Parent can connect to one child only and vice versa (due to previous note).
+* Parent can pair with one child only and vice versa (due to previous note).
 * Designed for modern browsers (IE not supported).
 
 ## Contributing
