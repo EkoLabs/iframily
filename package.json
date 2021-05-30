@@ -1,7 +1,7 @@
 {
   "name": "@ekolabs/iframily",
   "version": "1.0.0",
-  "description":"Modern iframes communication",
+  "description": "postMessage made simple & safe",
   "main": "dist/iframily.min.js",
   "license": "Apache-2.0",
   "engines": {
