@@ -19,8 +19,6 @@ This is how it works:
 2. If a parent id and child id match, they will pair.
 3. Send messages between paired iframilies.
 
-By the team from [<img src="https://user-images.githubusercontent.com/3951311/86791993-b4c78200-c072-11ea-8936-14db378904a3.png" valign="bottom" width=200 alt="eko Engineering">](https://eko.engineering)
-
 // TODO: replace images source?
 
 **With vanilla postMessage:**
@@ -30,6 +28,8 @@ By the team from [<img src="https://user-images.githubusercontent.com/3951311/86
 **With Iframily:**
 
 ![Iframily](https://s3.amazonaws.com/storage2.interlude.fm/dev_temp/asaf/iframily/images/new/iframily.png)
+
+By the team from [<img src="https://user-images.githubusercontent.com/3951311/86791993-b4c78200-c072-11ea-8936-14db378904a3.png" valign="bottom" width=200 alt="eko Engineering">](https://eko.engineering)
 
 ## Table of Contents
 
