@@ -1,3 +1,9 @@
+// MY TODO: check readme renders nicely in npm and github (initParent/Child api is longer line...)
+  "version": "1.0.0-temp.1",
+  npm publish --tag temp
+
+// MY TODO: targetOrigin regex not allowed both because it also controls the postMessage() and to avoid "dot" unescaping mistakes
+
 // TODO: icon
 <img src="https://eko.engineering/static/media/sonorous_logo.83f6c44b.svg" alt="Sonorous" width="200"/>
 
@@ -15,72 +21,19 @@ This is how it works:
 
 By the team from [<img src="https://user-images.githubusercontent.com/3951311/86791993-b4c78200-c072-11ea-8936-14db378904a3.png" valign="bottom" width=200 alt="eko Engineering">](https://eko.engineering)
 
-// TODO: decide
-**postMessage VS Iframily example:**
+// TODO: replace images source?
 
-```html
-<!-- PARENT -->
-<iframe src="./child.html" name="myFrame" onload="onIframeLoaded(this)"></iframe>
-<script>
-    window.onIframeLoaded = (iframeEl) => {
-        window.addEventListener('message', (event) => {
-            if (event.origin !== 'https://child.domain.com') {
-                return;
-            }
+**With vanilla postMessage:**
 
-            if (event.data.callerId === 'someId') {
-                alert(event.data.msg);
-            }
-        });
+![postMessage](https://s3.amazonaws.com/storage2.interlude.fm/dev_temp/asaf/iframily/images/new/postmessage.png)
 
-        let iframeName = iframeEl.getAttribute('name');
-        let iframeWindow = window.frames[iframeName];
-        iframeWindow.postMessage({ msg: 'Who ya gonna call?', callerId: 'someId' }, 'https://child.domain.com');
-    }
-</script>
+**With Iframily:**
 
-<!-- CHILD -->
-<script>
-    window.addEventListener('message', (event) => {
-        if (event.origin !== 'https://parent.domain.com') {
-            return;
-        }
-
-        if (event.data.callerId === 'someId' && event.data.msg === 'hi') {
-            event.source.postMessage({ msg: 'Ghostbusters! 👻', callerId: 'someId' });
-        }
-    });
-</script>
-```
-
-```html
-<!-- PARENT -->
-<iframe src="./child.html"></iframe>
-<script>
-    let parentIframily = Iframily.initParent('someId', 'https://child.domain.com');
-
-    parentIframily.sendMessage('Who ya gonna call?').then((response) => {
-        alert(response);
-    });
-</script>
-
-<!-- CHILD -->
-<script>
-    Iframily.initChild('someId', 'https://parent.domain.com', (msg) => {
-        if (msg === 'Who ya gonna call?') {
-            return 'Ghostbusters! 👻';
-        }
-    });
-</script>
-```
-
-![postMessage vs Iframily example](https://s3.amazonaws.com/storage2.interlude.fm/dev_temp/asaf/iframily/images/post-new.png)
-
-![postMessage vs Iframily example](https://s3.amazonaws.com/storage2.interlude.fm/dev_temp/asaf/iframily/images/iframily-new.png)
+![Iframily](https://s3.amazonaws.com/storage2.interlude.fm/dev_temp/asaf/iframily/images/new/iframily.png)
 
 ## Table of Contents
 
-* [Features]($features)
+* [Features](#features)
 * [Examples](#examples)
 * [Installation](#installation)
 * [API](#api)
