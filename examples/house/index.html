@@ -93,7 +93,7 @@
                     reject: () => {}
                 }
 
-                Iframily.initParent(id, (msg) => {
+                Iframily.initParent(id, window.location.origin, (msg) => {
                     console.log(`mom got msg from ${id}:`, msg);
 
                     if (msg === 'timeout') {

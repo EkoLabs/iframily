@@ -7,7 +7,7 @@
     <script src="../../dist/iframily.min.js"></script>
     <script src="./dialogue.js"></script>
     <script type="text/javascript">
-        let parentIframily = Iframily.initParent('treehouse');
+        let parentIframily = Iframily.initParent('treehouse', window.location.origin);
 
         document.addEventListener("DOMContentLoaded", ()=>{
             setupDialogue("root")

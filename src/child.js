@@ -22,6 +22,11 @@ module.exports = class Child extends Base {
     }
 
     _handleMessage(event) {
+        // Validate that the sender origin matches the target origin specified.
+        if (this._targetOrigin !== '*' && event.origin !== this._targetOrigin) {
+            return;
+        }
+
         let eventData = event && event.data;
 
         // Only handle this iframily message (according id).

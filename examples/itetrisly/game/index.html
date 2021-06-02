@@ -542,7 +542,7 @@
       document.querySelector('#menu').style.display = 'flex';
     }
 
-    let childIframily = Iframily.initChild(connectorId, (msg) => {
+    let childIframily = Iframily.initChild(connectorId, window.location.origin, (msg) => {
       // console.log(`child ${frameType} got msg`, msg);
 
       if (msg.action === 'start' && !started) {

@@ -1,6 +1,6 @@
 'use strict';
 
-const constants = require('./constants.js');
+const constants = require('./constants');
 
 let framesMap = {};
 function resetFrames() {
@@ -16,7 +16,7 @@ function setFrame(frame, type) {
 async function initIframily(type, options = {}) {
     let iframilyVarName =  options.iframilyVarName || constants.DEFAULT_FRAMILY_VAR_NAME;
     let id = options.id || constants.DEFAULT_FRAMILY_ID;
-    let targetOrigin = options.targetOrigin;
+    let targetOrigin = options.targetOrigin || constants.DANGEROUSLY_SET_WILDCARD;
 
     let frame = framesMap[type];
     let initMethodName = constants.INIT_METHOD_NAMES[type];
@@ -39,12 +39,11 @@ async function initIframily(type, options = {}) {
             window.disposedCount[_id]++;
         };
 
-        window[_iframilyVarName] = window.Iframily[_initMethodName](_id, (msg) => {
+        window[_iframilyVarName] = window.Iframily[_initMethodName](_id, _targetOrigin, (msg) => {
             window.messagesReceived[_id].push(msg);
         }, {
             onPairedHandler: onPairedHandler,
-            onDisposedHandler: onDisposedHandler,
-            targetOrigin: _targetOrigin
+            onDisposedHandler: onDisposedHandler
         });
     }, iframilyVarName, id, targetOrigin, initMethodName);
 }
@@ -95,7 +94,7 @@ function isDisposed(type, options = {}) {
     let frame = framesMap[type];
 
     return frame.evaluate((_iframilyVarName) => {
-        return window[_iframilyVarName].disposed;
+        return window[_iframilyVarName].isDisposed;
     }, iframilyVarName);
 }
 
