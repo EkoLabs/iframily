@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Neucha&display=swap');
 
 html{
   height: 100%;
@@ -18,6 +18,40 @@ body{
   font-family: 'Open Sans', sans-serif;
 }
 
+body .end{
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease-out;
+  transition-delay: 3.5s;
+}
+
+body.ended .end{
+  opacity: 1;
+  pointer-events: all;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(0,0,0,0.5) 2px, transparent 1%),
+  url(../images/bg.gif);
+  background-size: 3px 2px, cover;
+  background-position: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  button{
+    position: relative;
+  }
+
+  button span{
+    min-width: auto;
+  }
+}
+
+
 *:focus:not(.focus-visible) {
   outline: none;
 }
@@ -36,6 +70,7 @@ body{
   padding-bottom:   1275px / 2354px * 100%;
   width: 100%;
   position: relative;
+  margin-top: -90px;
 }
 
 #container{
@@ -55,7 +90,7 @@ body{
   width: 133px;
   height: 133px;
   left: 84px;
-  top: 112px;
+  top: 95px;
   z-index: 10;
 
   img {
@@ -69,7 +104,7 @@ body{
   position: absolute;
   z-index: 10;
   right: 25px;
-  bottom: 5px;
+  bottom: 15px;
   width: 500px;
   color: white;
   font-size: 14px;
@@ -99,13 +134,26 @@ iframe{
   height: 45.3%;
 }
 
+.description {
+  position: absolute;
+  display: block;
+  width: 284px;
+  left: 27px;
+  top: 239px;
+  z-index: 10;
+  font-size: 18px;
+  //text-shadow: 2px 2px 27px black;
+  color: black;
+}
+
+
 .dialogueOptionsContainer{
   position: absolute;
   left: 65%;
   top: 15%;
 }
 
-.dialogueOptionsContainer button{
+button{
   min-height: 50px;
   border: none;
   text-align: left;
@@ -128,14 +176,12 @@ iframe{
     left: 0;
     width: 100%;
     height: 100%;
-    font-family: 'Amatic SC', cursive;
-    font-size: 28px;
+    font-family: 'Neucha', cursive;
+    font-size: 24px;
     color: white;
     z-index: 5;
-    padding: 10px 20px;
-    font-weight: bold;
-    min-width: 200px;
-    max-width: 400px;
+    padding: 10px 12px;
+    min-width: 320px;
 
     &:before, &:after{
       bottom: -41px;
@@ -205,6 +251,7 @@ iframe{
   button{
     opacity: 0;
     pointer-events: none;
+    filter: brightness(60%);
   }
 }
 
