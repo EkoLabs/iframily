@@ -12,7 +12,7 @@ body {
 .dialogueOptionsContainer {
   position: absolute;
   left: 5%;
-  top: 6%; }
+  top: 9%; }
 
 .dialogueOptionsContainer button {
   min-height: 50px;
@@ -119,3 +119,15 @@ body {
 
 .dialogueOptionsContainer.selected2 button:nth-child(3) span:before, .dialogueOptionsContainer.selected2 button:nth-child(3) span:after {
   opacity: 1; }
+
+.label {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  background: #e6e6e6;
+  font-size: 14px;
+  padding: 4px 6px;
+  font-weight: bold;
+  font-family: arial;
+  z-index: 1;
+  opacity: 0.6; }

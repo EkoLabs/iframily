@@ -48,6 +48,7 @@ body.ended .end{
 
   button span{
     min-width: auto;
+    font-family: sans-serif, "arial";
   }
 }
 
@@ -287,4 +288,17 @@ button{
       opacity: 1;
     }
   }
+}
+
+.label{
+  position: absolute;
+  top: 0px;
+  left:0;
+  background: #e6e6e6;
+  font-size: 14px;
+  padding: 4px 6px;
+  font-weight: bold;
+  font-family: arial;
+  z-index: 1;
+  opacity: 0.6;
 }
