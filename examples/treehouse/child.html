@@ -8,8 +8,6 @@
 
     <script type="text/javascript">
          Iframily.initChild('treehouse', window.location.origin, (msg) => {
-            console.log('child got msg:', msg);
-
             return new Promise((resolve, reject) => {
                 let dialogOptions = getDialogueOptions(msg, replyId => {
                     setSelectedMessage(replyId);
@@ -40,6 +38,6 @@
 </head>
 <body>
     <div class="dialogueOptionsContainer"></div>
-
+    <div class="label">child.html</div>
 </body>
 </html>

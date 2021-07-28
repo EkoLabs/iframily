@@ -11,6 +11,8 @@
 
         document.addEventListener("DOMContentLoaded", ()=>{
             setupDialogue("root")
+
+            document.querySelector(".end button").addEventListener("click", ()=>window.location.reload())
         })
 
         function setupDialogue(dialogueId){
@@ -26,8 +28,10 @@
             dialogueOptionsContainerEl = document.querySelector(".dialogueOptionsContainer");
             dialogueOptionsContainerEl.classList.remove("selected0", "selected1", "selected2");
             dialogueOptionsContainerEl.innerHTML = '';
-            if (optionElements) {
+            if (optionElements.length > 0) {
                 optionElements.forEach(optionElement => dialogueOptionsContainerEl.appendChild(optionElement));
+            } else {
+                document.body.classList.add('ended');
             }
         }
 
@@ -45,6 +49,7 @@
     <div id="fit_container">
         <div id="aspect_ratio_box">
             <a href="#" class="logo"><img src="images/iframily_logo.png"/></a>
+            <div class="description">postMessage made simple & safe</div>
             <div class="shoutout">by the <a href="/" class="ekologo">eko <span>Engineering</span></a> team </div>
             <div id="container">
                 <iframe src="child.html"></iframe>
@@ -52,5 +57,9 @@
             </div>
         </div>
     </div>
+    <div class="end">
+        <button><span>restart</span></button>
+    </div>
+    <div class="label">father.html</div>
 </body>
 </html>

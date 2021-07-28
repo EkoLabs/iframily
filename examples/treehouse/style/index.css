@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Neucha&display=swap");
 html {
   height: 100%;
   margin: 0;
@@ -15,6 +15,34 @@ body {
   padding: 0;
   font-family: 'Open Sans', sans-serif; }
 
+body .end {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease-out;
+  transition-delay: 3.5s; }
+
+body.ended .end {
+  opacity: 1;
+  pointer-events: all;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.5) 2px, transparent 1%), url(../images/bg.gif);
+  background-size: 3px 2px, cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+body.ended .end button {
+  position: relative; }
+
+body.ended .end button span {
+  min-width: auto;
+  font-family: sans-serif, "arial"; }
+
 *:focus:not(.focus-visible) {
   outline: none; }
 
@@ -30,7 +58,8 @@ body {
   overflow: hidden;
   padding-bottom: 54.16313%;
   width: 100%;
-  position: relative; }
+  position: relative;
+  margin-top: -90px; }
 
 #container {
   position: absolute;
@@ -48,7 +77,7 @@ body {
   width: 133px;
   height: 133px;
   left: 84px;
-  top: 112px;
+  top: 95px;
   z-index: 10; }
 
 .logo img {
@@ -60,7 +89,7 @@ body {
   position: absolute;
   z-index: 10;
   right: 25px;
-  bottom: 5px;
+  bottom: 15px;
   width: 500px;
   color: white;
   font-size: 14px; }
@@ -86,12 +115,22 @@ iframe {
   width: 27.3%;
   height: 45.3%; }
 
+.description {
+  position: absolute;
+  display: block;
+  width: 284px;
+  left: 27px;
+  top: 239px;
+  z-index: 10;
+  font-size: 18px;
+  color: black; }
+
 .dialogueOptionsContainer {
   position: absolute;
   left: 65%;
   top: 15%; }
 
-.dialogueOptionsContainer button {
+button {
   min-height: 50px;
   border: none;
   text-align: left;
@@ -103,26 +142,24 @@ iframe {
   top: 0;
   left: 0; }
 
-.dialogueOptionsContainer button:hover {
+button:hover {
   filter: brightness(1.1); }
 
-.dialogueOptionsContainer button span {
+button span {
   display: block;
   position: relative;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  font-family: 'Amatic SC', cursive;
-  font-size: 28px;
+  font-family: 'Neucha', cursive;
+  font-size: 24px;
   color: white;
   z-index: 5;
-  padding: 10px 20px;
-  font-weight: bold;
-  min-width: 200px;
-  max-width: 400px; }
+  padding: 10px 12px;
+  min-width: 320px; }
 
-.dialogueOptionsContainer button span:before, .dialogueOptionsContainer button span:after {
+button span:before, button span:after {
   bottom: -41px;
   left: 14%;
   border: solid transparent;
@@ -139,12 +176,12 @@ iframe {
   opacity: 0;
   transition: 0.15s ease-in all; }
 
-.dialogueOptionsContainer button span:after {
+button span:after {
   bottom: -46px;
   border-top-color: #037777;
   z-index: 2; }
 
-.dialogueOptionsContainer button:before, .dialogueOptionsContainer button:after {
+button:before, button:after {
   content: "";
   position: absolute;
   top: 0;
@@ -156,27 +193,28 @@ iframe {
   border-bottom-right-radius: 30px;
   border-bottom-left-radius: 5px; }
 
-.dialogueOptionsContainer button:before {
+button:before {
   background: #52b3b5;
   z-index: 2; }
 
-.dialogueOptionsContainer button:after {
+button:after {
   top: 4px;
   background-color: #037777;
   z-index: 1; }
 
-.dialogueOptionsContainer button:nth-child(1) {
+button:nth-child(1) {
   transform: translateY(0px); }
 
-.dialogueOptionsContainer button:nth-child(2) {
+button:nth-child(2) {
   transform: translateY(85px); }
 
-.dialogueOptionsContainer button:nth-child(3) {
+button:nth-child(3) {
   transform: translateY(170px); }
 
 .dialogueOptionsContainer.selected0 button, .dialogueOptionsContainer.selected1 button, .dialogueOptionsContainer.selected2 button {
   opacity: 0;
-  pointer-events: none; }
+  pointer-events: none;
+  filter: brightness(60%); }
 
 .dialogueOptionsContainer.selected0 button:nth-child(1) {
   transform: translateY(170px);
@@ -199,3 +237,15 @@ iframe {
 
 .dialogueOptionsContainer.selected2 button:nth-child(3) span:before, .dialogueOptionsContainer.selected2 button:nth-child(3) span:after {
   opacity: 1; }
+
+.label {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  background: #e6e6e6;
+  font-size: 14px;
+  padding: 4px 6px;
+  font-weight: bold;
+  font-family: arial;
+  z-index: 1;
+  opacity: 0.6; }

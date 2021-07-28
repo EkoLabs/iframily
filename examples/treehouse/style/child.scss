@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
 body{
   margin: 0;
   padding: 0;
@@ -13,7 +15,7 @@ body{
 .dialogueOptionsContainer{
   position: absolute;
   left: 5%;
-  top: 6%;
+  top: 9%;
 }
 
 
@@ -37,13 +39,12 @@ body{
     position: relative;
     top: 0;
     left: 0;
-    font-family: 'Amatic SC', cursive;
+    font-family: 'Bangers', cursive;
     font-size: 24px;
     color: #4d4d4d;
     z-index: 5;
     padding: 10px 20px;
-    font-weight: bold;
-    min-width: 200px;
+    min-width: 230px;
     max-width: 350px;
 
     &:before, &:after{
@@ -102,24 +103,25 @@ body{
   }
 
   &:nth-child(2){
-    transform: translateY(85px);
+    transform: translateY(93px);
   }
 
   &:nth-child(3){
-    transform: translateY(170px);
+    transform: translateY(185px);
   }
 }
 
 .dialogueOptionsContainer.selected0, .dialogueOptionsContainer.selected1, .dialogueOptionsContainer.selected2{
-  button{
+  button {
     opacity: 0;
     pointer-events: none;
+    filter: brightness(60%);
   }
 }
 
 .dialogueOptionsContainer.selected0{
   button:nth-child(1){
-    transform: translateY(58px) translateX(79px);
+    transform: translateY(58px) translateX(59px);
     opacity: 1;
 
     span:before, span:after{
@@ -130,7 +132,7 @@ body{
 
 .dialogueOptionsContainer.selected1{
   button:nth-child(2){
-    transform: translateY(58px) translateX(79px);
+    transform: translateY(58px) translateX(59px);
     opacity: 1;
     pointer-events: none;
 
@@ -142,11 +144,24 @@ body{
 
 .dialogueOptionsContainer.selected2{
   button:nth-child(3){
-    transform: translateY(58px) translateX(79px);
+    transform: translateY(58px) translateX(59px);
     opacity: 1;
 
     span:before, span:after{
       opacity: 1;
     }
   }
+}
+
+.label{
+  position: absolute;
+  top: 0px;
+  left:0;
+  background: #e6e6e6;
+  font-size: 14px;
+  padding: 4px 6px;
+  font-weight: bold;
+  font-family: arial;
+  z-index: 1;
+  opacity: 0.6;
 }
