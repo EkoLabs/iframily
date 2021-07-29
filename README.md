@@ -1,9 +1,3 @@
-// MY TODO: check readme renders nicely in npm and github (initParent/Child api is longer line...)
-  "version": "1.0.0-temp.1",
-  npm publish --tag temp
-
-// MY TODO: targetOrigin regex not allowed both because it also controls the postMessage() and to avoid "dot" unescaping mistakes
-
 // TODO: icon
 <img src="https://eko.engineering/static/media/sonorous_logo.83f6c44b.svg" alt="Sonorous" width="200"/>
 
@@ -137,7 +131,7 @@ If you manually listen to messages using the window ["message" event](https://de
 window.addEventListener('message', receiveMessage);
 
 function receiveMessage(event) {
-    // Ignore iframily messages.
+    // Ignore Iframily messages.
     if (Iframily.isIframilyMessage(event)) {
         return;
     }
@@ -159,7 +153,7 @@ The iframily instance is the object returned when initializing a new iframily us
 
 Returns a promise that will be resolved with the response value from the receiving iframily instance message handler. The promise will be rejected if the promised returned by the receiving iframily instance rejects.
 
-> if the receiving iframily instance did not return an explicit response value in its message handler, the promise will be resolved with `undefined`.
+> If the receiving iframily instance did not return an explicit response value in its message handler, the promise will be resolved with `undefined`.
 
 #### `f.dispose()`
 
@@ -192,15 +186,13 @@ let msgHandler = function(msg) {
 
 let iframilyParent = Iframily.initParent('myUniqueId', window.location.origin, msgHandler);
 
-iframilyParent.sendMessage('do something')
-    .then((response) => {
-        console.log('parent got response:', response);
-    });
+iframilyParent.sendMessage('do something').then((response) => {
+    console.log('parent got response:', response);
+});
 
-iframilyParent.sendMessage('do something async')
-    .then((response) => {
-        console.log('parent got async response:', response);
-    });
+iframilyParent.sendMessage('do something async').then((response) => {
+    console.log('parent got async response:', response);
+});
 ```
 
 ```javascript
@@ -225,7 +217,7 @@ let msgHandler = function(msg) {
 
 let iframilyChild = Iframily.initChild('myUniqueId', window.location.origin, msgHandler);
 
-iframilyChild.sendMessage({ text: 'fancy' });
+iframilyChild.sendMessage({ text: 'fancy...' });
 ```
 
 * Your unique id (`myUniqueId` in the example) should match between parent and child.
@@ -234,6 +226,7 @@ iframilyChild.sendMessage({ text: 'fancy' });
 
 * You can create multiple iframilies in each frame but the unique ids cannot be used more than once per frame (unless the previous one has been disposed).
 * Parent can pair with one child only and vice versa (due to previous note).
+* Specifying "targetOrigin" as regex is not supported mostly to avoid "dot" unescaping security vulnerability.
 * Designed for modern browsers (IE not supported).
 
 ## Contributing

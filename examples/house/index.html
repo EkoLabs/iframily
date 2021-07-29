@@ -1,15 +1,15 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
-       <meta charset="UTF-8">
-
-       <link rel="stylesheet" href="./style/index.css" />
-
-       <script src="./../../dist/iframily.min.js"></script>
+        <meta charset="UTF-8">
+        <title>iframily house</title>
+        <link rel="stylesheet" href="./style/index.css" />
+        <script src="./../../dist/iframily.min.js"></script>
     </head>
     <body>
         <div class="instructionsContainer">
             <div class="label">mother.html</div>
-            <a href="#" class="logo"><img src="images/iframily_logo.png"/></a>
+            <a href="https://github.com/EkoLabs/iframily" class="logo"><img src="images/iframily_logo.png"/></a>
             <div class="description">postMessage made simple & safe</div>
             <div class="instructions">
                 <em>Being a mom isn't easy.</em>
@@ -18,13 +18,13 @@
         </div>
         <div id="aspect_ratio_box">
             <div id="container">
-                <div class="shoutout">by the <a href="/" class="ekologo">eko <span>Engineering</span></a> team </div>
+                <div class="shoutout">by the <a href="https://eko.engineering" class="ekologo">eko <span>engineering</span></a> team</div>
                 <div id="phone">
                     <div id="character_select">
-                        <button id="brother_button" class="character" onclick="onCharacterClick(this, 'brother')">brother</button>
-                        <button id="baby_button" class="character" onclick="onCharacterClick(this, 'baby')">baby</button>
-                        <button id="sister_button" class="character" onclick="onCharacterClick(this, 'sister')">sister</button>
-                        <button id="father_button" class="character" onclick="onCharacterClick(this, 'father')">father</button>
+                        <button id="brother_button" class="character">brother</button>
+                        <button id="baby_button" class="character">baby</button>
+                        <button id="sister_button" class="character">sister</button>
+                        <button id="father_button" class="character">father</button>
                     </div>
                     <div id="emoji_keyboard">
                         <button class="emoji">🙂</button>
@@ -61,73 +61,6 @@
             </div>
         </div>
 
-        <script>
-            let currCharacterSelected;
-
-            function onCharacterClick(el, characterName) {
-                // Deselect all first.
-                let characters = document.querySelectorAll('.character');
-                characters.forEach(c => c.classList.remove('selected'));
-
-                el.classList.add('selected');
-                currCharacterSelected = characterName;
-            };
-
-            document.querySelectorAll('.emoji').forEach((emoji) => {
-                emoji.addEventListener('click', () => {
-                    if (currCharacterSelected === 'baby') {
-                        responsePromisesMap.baby.resolve(emoji.innerText);
-                    } else if (currCharacterSelected === 'brother') {
-                        responsePromisesMap.brother.resolve(emoji.innerText);
-                    } else if (currCharacterSelected === 'father') {
-                        responsePromisesMap.father.resolve(emoji.innerText);
-                    } else if (currCharacterSelected === 'sister') {
-                        responsePromisesMap.sister.resolve(emoji.innerText);
-                    }
-                });
-            });
-
-            let responsePromisesMap = {};
-            function initIframily(id) {
-                responsePromisesMap[id] = {
-                    resolve: () => {},
-                    reject: () => {}
-                }
-
-                Iframily.initParent(id, window.location.origin, (msg) => {
-                    console.log(`mom got msg from ${id}:`, msg);
-
-                    if (msg === 'timeout') {
-                        responsePromisesMap[id].reject();
-                        setIsMessageWaiting(id, false);
-                    } else {
-                        setIsMessageWaiting(id, true);
-
-                        return new Promise((resolve, reject) => {
-                            responsePromisesMap[id].resolve = resolve;
-                            responsePromisesMap[id].reject = reject;
-                        }).finally(() => {
-                            setIsMessageWaiting(id, false)
-                        });
-                    }
-                });
-            }
-
-            function setIsMessageWaiting(character, status){
-                let buttonEl = document.getElementById(`${character}_button`);
-                if (status) {
-                    buttonEl.classList.add('message_waiting');
-                    setTimeout(() => buttonEl.classList.add('shake'), 15000);
-                } else {
-                    buttonEl.classList.remove('message_waiting');
-                    buttonEl.classList.remove('shake');
-                }
-            }
-
-            initIframily('baby');
-            initIframily('brother');
-            initIframily('father');
-            initIframily('sister');
-        </script>
+        <script src="./index.js"></script>
     </body>
 </html>

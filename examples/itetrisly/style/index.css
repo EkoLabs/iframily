@@ -113,17 +113,17 @@ body.parent #bottomContainer {
 .container .footer .credits {
   margin-left: auto; }
 
-.container .footer .credits .eko {
+.container .footer .credits .ekologo {
   position: relative;
   top: 4px;
   color: rgba(255, 255, 255, 0);
   font-size: 30px;
-  background-image: url(./images/ekoengineering_logo.svg);
+  background-image: url(../images/ekoengineering_logo.svg);
   background-size: 100%;
   background-repeat: no-repeat;
   margin: 0 5px; }
 
-.container .footer .credits .eko span {
+.container .footer .credits .ekologo span {
   padding-left: 5px;
   font-size: 16px; }
 

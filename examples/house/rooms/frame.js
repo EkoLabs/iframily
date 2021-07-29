@@ -56,7 +56,7 @@ function addMessage(text, showDots, type) {
 }
 
 function askQuestionInRandomTime() {
-    let randTime = Math.random() * (QUESTION_RANDOM_TIME_MAX - QUESTION_RANDOM_TIME_MIN) + QUESTION_RANDOM_TIME_MIN;
+    let randTime = Math.random() * ((QUESTION_RANDOM_TIME_MAX - QUESTION_RANDOM_TIME_MIN) + QUESTION_RANDOM_TIME_MIN);
     setTimeout(() => {
         let currQuestion = getRandomQuestion();
         prevQuestion = currQuestion;
@@ -66,8 +66,6 @@ function askQuestionInRandomTime() {
                 let timeoutID;
                 window.frameIframily.sendMessage(currQuestion)
                     .then((resp) => {
-                        console.log(`${window.frameIframily.id} got response:`, resp);
-
                         clearTimeout(timeoutID);
 
                         addMessage(resp, false, 'sent');
@@ -79,19 +77,15 @@ function askQuestionInRandomTime() {
                             setTimeout(() => {
                                 addMessage(responseOfTheResponse, true);
                                 resolve();
-                            }, RESPONSE_OF_THE_RESPONSE_DELAY)
-                        })
+                            }, RESPONSE_OF_THE_RESPONSE_DELAY);
+                        });
                     })
                     .catch(() => {
-                        console.log(`${window.frameIframily.id} catch (timeout)`);
-
                         let responses = window.dialogue[currQuestion];
                         let responseOfTheResponse = responses.timeout;
                         return addMessage(responseOfTheResponse, true);
                     })
                     .finally(() => {
-                        console.log(`${window.frameIframily.id} finally`);
-
                         if (questionsPool.length === 0) {
                             questionsPool = Array.from(origQuestions);
                         }
