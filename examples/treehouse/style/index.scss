@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Neucha&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 
 html{
   height: 100%;
@@ -145,6 +146,7 @@ iframe{
   font-size: 18px;
   //text-shadow: 2px 2px 27px black;
   color: black;
+  font-family: 'Raleway', sans-serif;
 }
 
 
@@ -175,7 +177,7 @@ button{
     position: relative;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 103%;
     height: 100%;
     font-family: 'Neucha', cursive;
     font-size: 24px;
