@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
 html {
   height: 100%;
   margin: 0;
@@ -17,7 +18,11 @@ body {
 .instructionsContainer {
   position: absolute;
   top: 180px;
-  left: 0; }
+  left: 0;
+  width: 23%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
 
 @media only screen and (max-height: 1000px) {
   .instructionsContainer {
@@ -25,7 +30,7 @@ body {
 
 .label {
   position: absolute;
-  top: 50px;
+  top: 0px;
   left: 0;
   background: #e6e6e6;
   font-size: 14px;
@@ -35,13 +40,11 @@ body {
   z-index: 100; }
 
 .logo {
-  position: absolute;
   display: block;
   width: 133px;
   height: 133px;
-  left: 64px;
-  top: 112px;
-  z-index: 10; }
+  z-index: 10;
+  margin-top: 30px; }
 
 .logo img {
   width: 100%;
@@ -49,28 +52,21 @@ body {
   object-fit: contain; }
 
 .description {
-  position: absolute;
   z-index: 10;
-  left: 33px;
-  top: 247px;
-  color: white;
+  color: black;
   font-size: 14px;
-  width: 220px; }
+  text-align: center;
+  width: 100%;
+  font-family: 'Raleway', sans-serif; }
 
 .instructions {
-  position: absolute;
+  margin-top: 20px;
+  padding: 15px;
   z-index: 10;
-  left: 25px;
-  top: 287px;
-  color: white;
+  color: black;
   font-size: 16px;
-  width: 160px;
-  text-shadow: 0px 0px 20px #000000; }
-
-@media only screen and (min-width: 1200px) {
-  .instructions {
-    left: 40px;
-    width: 220px; } }
+  text-shadow: 0px 0px 5px white;
+  font-weight: bold; }
 
 .instructions em {
   display: block;
@@ -125,8 +121,8 @@ body {
   position: relative;
   width: 16.2%;
   height: 43.4%;
-  left: 21.3%;
-  top: 43.3%;
+  left: 25.6%;
+  top: 44.9%;
   display: flex;
   flex-direction: column; }
 
