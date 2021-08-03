@@ -1,5 +1,6 @@
 'use strict';
 
+const START_DELAY = 5000;
 const QUESTION_RANDOM_TIME_MIN = 3000;
 const QUESTION_RANDOM_TIME_MAX = 30000;
 const QUESTION_TIMEOUT = 20000;
@@ -100,7 +101,12 @@ function askQuestionInRandomTime() {
     }, randTime);
 }
 
-askQuestionInRandomTime();
+
+// wait a bit before starting so it's not overwhelming
+setTimeout(()=> {
+    askQuestionInRandomTime();
+}, START_DELAY);
+
 
 // Disable scrolling
 window.onwheel = function() {
