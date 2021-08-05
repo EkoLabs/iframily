@@ -19,6 +19,7 @@ let translateValueX = 0;
 let doneMessagesCounter = 0;
 let bottomContainerEl = document.querySelector('#bottomContainer');
 let gameMessageEl = document.querySelector('#gameMessage');
+let gamePendingStart = true;
 let shouldReloadOnStart = false;
 
 // ------------------------------------------------
@@ -50,6 +51,7 @@ function initFramilies() {
                 gameMessageEl.style.display = 'block';
                 gameMessageEl.innerHTML = 'game over<small>hit space to restart</small>';
 
+                gamePendingStart = true;
                 shouldReloadOnStart = true;
             } else if (msg.action === 'done') {
                 // Only when all expected 'done' messages received, relay the message
@@ -172,18 +174,21 @@ function keydown(e) {
     /* eslint-disable no-magic-numbers */
     switch (e.keyCode) {
         case 32: // Space
-            if (shouldReloadOnStart) {
-                window.frames['topIframe'].location.reload();
-                window.frames['bottom1'].location.reload();
-                window.frames['bottom2'].location.reload();
-                window.frames['bottom3'].location.reload();
+            if (gamePendingStart) {
+                if (shouldReloadOnStart) {
+                    window.frames['topIframe'].location.reload();
+                    window.frames['bottom1'].location.reload();
+                    window.frames['bottom2'].location.reload();
+                    window.frames['bottom3'].location.reload();
 
-                doneMessagesCounter = 0;
-                initFramilies();
+                    doneMessagesCounter = 0;
+                    initFramilies();
+                }
+
+                parentTopIframily.sendMessage({ action: 'start' });
+                gameMessageEl.style.display = 'none';
+                gamePendingStart = false;
             }
-
-            parentTopIframily.sendMessage({ action: 'start' });
-            gameMessageEl.style.display = 'none';
 
             e.preventDefault();
             break;
