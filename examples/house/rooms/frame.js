@@ -24,10 +24,10 @@ function getRandomQuestion() {
 function autoScroll() {
     let dialogEl = document.querySelector('#dialog');
     let latestNewMessage = [...dialogEl.querySelectorAll('.new')].pop();
-    latestNewMessage.scrollIntoView({
+
+    dialogEl.scrollTo({
+        top: latestNewMessage.offsetTop + 4,
         behavior: 'smooth',
-        block: 'start',
-        inline: 'nearest'
     });
 }
 
