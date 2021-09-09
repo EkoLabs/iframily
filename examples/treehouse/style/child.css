@@ -93,6 +93,17 @@ body {
 .dialogueOptionsContainer button:nth-child(3) {
   transform: translateY(185px); }
 
+.dialogueOptionsContainer:not([class*="selected"]):not(:empty):before {
+  content: "Choose reply:";
+  position: absolute;
+  top: -20px;
+  left: 0px;
+  font-size: 14px;
+  color: white;
+  width: 321px;
+  font-weight: bold;
+  text-align: center; }
+
 .dialogueOptionsContainer.selected0 button, .dialogueOptionsContainer.selected1 button, .dialogueOptionsContainer.selected2 button {
   opacity: 0;
   pointer-events: none;

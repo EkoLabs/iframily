@@ -1,6 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Neucha&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 
+@mixin shortAndWide {
+  @media only screen and (max-height: 600px) {
+    @content;
+  }
+}
+
 html{
   height: 100%;
   margin: 0;
@@ -17,6 +23,10 @@ body{
   margin: 0;
   padding:0;
   font-family: 'Open Sans', sans-serif;
+
+  @include shortAndWide{
+    overflow: hidden;
+  }
 }
 
 body .end{
@@ -73,7 +83,11 @@ body.ended .end{
   width: 100%;
   position: relative;
   margin-top: -90px;
-}
+
+  @include shortAndWide{
+      margin-top: 45px;
+   }
+  }
 
 #container{
   position: absolute;
@@ -84,6 +98,7 @@ body.ended .end{
   background: url(../images/background.jpg);
   background-size: 100% 100%;
   background-repeat: no-repeat;
+
 }
 
 .logo {
@@ -110,6 +125,11 @@ body.ended .end{
   width: 500px;
   color: white;
   font-size: 14px;
+
+  @include shortAndWide{
+    top: 530px;
+    left: 20px;
+  }
 }
 
 .shoutout a.ekologo {
@@ -154,6 +174,18 @@ iframe{
   position: absolute;
   left: 65%;
   top: 15%;
+
+  &:not([class*="selected"]):not(:empty):before, {
+    content: "Choose reply:";
+    position: absolute;
+    top: -20px;
+    left: 0px;
+    font-size: 14px;
+    color: #037777;
+    width: 350px;
+    font-weight: bold;
+    text-align: center;
+  }
 }
 
 button{

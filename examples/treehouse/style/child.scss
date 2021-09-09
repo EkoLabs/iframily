@@ -111,6 +111,18 @@ body{
   }
 }
 
+.dialogueOptionsContainer:not([class*="selected"]):not(:empty):before, {
+  content: "Choose reply:";
+  position: absolute;
+  top: -20px;
+  left: 0px;
+  font-size: 14px;
+  color: white;
+  width: 321px;
+  font-weight: bold;
+  text-align: center;
+}
+
 .dialogueOptionsContainer.selected0, .dialogueOptionsContainer.selected1, .dialogueOptionsContainer.selected2{
   button {
     opacity: 0;

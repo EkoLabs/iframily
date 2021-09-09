@@ -16,6 +16,10 @@ body {
   padding: 0;
   font-family: 'Open Sans', sans-serif; }
 
+@media only screen and (max-height: 600px) {
+  body {
+    overflow: hidden; } }
+
 body .end {
   opacity: 0;
   pointer-events: none;
@@ -62,6 +66,10 @@ body.ended .end button span {
   position: relative;
   margin-top: -90px; }
 
+@media only screen and (max-height: 600px) {
+  #aspect_ratio_box {
+    margin-top: 45px; } }
+
 #container {
   position: absolute;
   top: 0;
@@ -94,6 +102,11 @@ body.ended .end button span {
   width: 500px;
   color: white;
   font-size: 14px; }
+
+@media only screen and (max-height: 600px) {
+  .shoutout {
+    top: 530px;
+    left: 20px; } }
 
 .shoutout a.ekologo {
   position: relative;
@@ -131,6 +144,17 @@ iframe {
   position: absolute;
   left: 65%;
   top: 15%; }
+
+.dialogueOptionsContainer:not([class*="selected"]):not(:empty):before {
+  content: "Choose reply:";
+  position: absolute;
+  top: -20px;
+  left: 0px;
+  font-size: 14px;
+  color: #037777;
+  width: 350px;
+  font-weight: bold;
+  text-align: center; }
 
 button {
   min-height: 50px;
