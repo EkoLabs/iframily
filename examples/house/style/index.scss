@@ -86,21 +86,27 @@ body{
   z-index: 10;
   color: black;
   font-size: 16px;
-  text-shadow: 0px 0px 5px white;
-  font-weight: bold;
+
+
+  @media only screen and (max-height: 800px){
+    width: 190px;
+    font-size: 14px;
+    align-self: flex-start;
+  }
 
   em{
     display: block;
     font-size: 24px;
     margin-bottom: 10px;
   }
+
 }
 
 .shoutout{
   position: absolute;
   z-index: 10;
   left: 25px;
-  bottom: 5px;
+  bottom: 0px;
   width: 500px;
   color: white;
   font-size: 14px;
@@ -130,7 +136,7 @@ body{
   position: relative;
 
   @include shortAndWide{
-    top: -140px;
+    top: -114px;
   }
 }
 
