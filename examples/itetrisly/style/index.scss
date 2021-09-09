@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+@mixin shortAndWide {
+  @media only screen and (max-height: 600px) {
+    @content;
+  }
+}
+
 html {
   width: 100%;
   height: 100%;
@@ -66,6 +74,10 @@ body.parent{
   flex-direction: column;
   padding: 20px;
 
+  @include shortAndWide{
+    transform: scale(0.75);
+  }
+
   .logo {
     position: absolute;
     display: block;
@@ -111,6 +123,7 @@ body.parent{
     top: 160px;
     z-index: 10;
     color: white;
+    font-family: 'Raleway', sans-serif;
   }
 
 
@@ -129,12 +142,12 @@ body.parent{
     .credits{
       margin-left: auto;
 
-      .eko{
+      .ekologo{
         position: relative;
         top: 4px;
         color: hsla(0,0%,100%,0);
         font-size: 30px;
-        background-image: url(./images/ekoengineering_logo.svg);
+        background-image: url(../images/ekoengineering_logo.svg);
         background-size: 100%;
         background-repeat: no-repeat;
         margin: 0 5px;
