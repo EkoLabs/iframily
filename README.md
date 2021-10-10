@@ -57,19 +57,19 @@ Iframily pushes you to be more responsible with your frame security by keeping i
 
 Demonstrates a simple usage of Iframily to communicate between a parent and child frame through an interactive, sweet father-son dialogue about world domination.
 
-[<img src="https://codepen.io/asimen1/pen/ZEBzaLd/image/small.png" width=400>](https://codepen.io/asimen1/pen/ZEBzaLd)
+[<img src="https://s3.amazonaws.com/eko.com/s/iframily/codepen-tree.png" width=400>](https://codepen.io/asimen1/pen/ZEBzaLd)
 
 [Text Chat Madness](https://codepen.io/asimen1/pen/KKNdgXb)
 
 Demonstrates usage of Iframily to communicate between a parent frame and multiple child frames through interactive conversations in a family of five. How will mom handle all these questions? You decide!
 
-[<img src="https://codepen.io/asimen1/pen/KKNdgXb/image/small.png" width=400>](https://codepen.io/asimen1/pen/KKNdgXb)
+[<img src="https://s3.amazonaws.com/eko.com/s/iframily/codepen-chat.png" width=400>](https://codepen.io/asimen1/pen/KKNdgXb)
 
 [Crazy Tetris](https://codepen.io/asimen1/pen/qBqOZMY)
 
 A novel (and somewhat strange) reimplementation of the classic Tetris using Iframily! Each frame runs its own self-contained Tetris instance. The twist? Instead of moving the pieces, the player moves the frames themselves to align the pieces and allow them to flow freely between frames.
 
-[<img src="https://codepen.io/asimen1/pen/qBqOZMY/image/small.png" width=400>](https://codepen.io/OpherV/pen/QWjQbmZ?editors=1100)
+[<img src="https://s3.amazonaws.com/eko.com/s/iframily/codepen-tetris.png" width=400>](https://codepen.io/OpherV/pen/QWjQbmZ?editors=1100)
 
 See the repo's `examples/` directory for the source code.
 
