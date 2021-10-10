@@ -1,5 +1,4 @@
-// TODO: icon
-<img src="https://eko.engineering/static/media/sonorous_logo.83f6c44b.svg" alt="Sonorous" width="200"/>
+<img src="https://s3.amazonaws.com/eko.com/s/iframily/iframily_logo.png" alt="Iframily" width="200"/>
 
 # Iframily - postMessage made simple & safe
 
@@ -13,15 +12,13 @@ This is how it works:
 2. If a parent id and child id match, they will pair.
 3. Send messages between paired iframilies.
 
-// TODO: replace images source?
-
 **With vanilla postMessage:**
 
-![postMessage](https://s3.amazonaws.com/storage2.interlude.fm/dev_temp/asaf/iframily/images/new/postmessage.png)
+![postMessage](https://s3.amazonaws.com/eko.com/s/iframily/postmessage.png)
 
 **With Iframily:**
 
-![Iframily](https://s3.amazonaws.com/storage2.interlude.fm/dev_temp/asaf/iframily/images/new/iframily.png)
+![Iframily](https://s3.amazonaws.com/eko.com/s/iframily/iframily.png)
 
 By the team from [<img src="https://user-images.githubusercontent.com/3951311/86791993-b4c78200-c072-11ea-8936-14db378904a3.png" valign="bottom" width=200 alt="eko Engineering">](https://eko.engineering)
 
@@ -54,26 +51,25 @@ Iframily pushes you to be more responsible with your frame security by keeping i
 * Zero dependencies.
 * Unit + battle tested
 
-// TODO: real codepen links + images
 ## Examples
 
-[Invasion of the frame snatchers](https://codepen.io/OpherV/pen/xxwRMBw?editors=0100)
+[Invasion of the frame snatchers](https://codepen.io/asimen1/pen/ZEBzaLd)
 
 Demonstrates a simple usage of Iframily to communicate between a parent and child frame through an interactive, sweet father-son dialogue about world domination.
 
-[<img src="https://user-images.githubusercontent.com/3951311/81201022-71e32280-8fcd-11ea-9b9d-6adcf7fa6394.png" width=400>](https://codepen.io/OpherV/pen/xxwRMBw?editors=0100)
+[<img src="https://codepen.io/asimen1/pen/ZEBzaLd/image/small.png" width=400>](https://codepen.io/asimen1/pen/ZEBzaLd)
 
-[Text Chat Madness](https://codepen.io/OpherV/pen/PoPQwaz?editors=0010)
+[Text Chat Madness](https://codepen.io/asimen1/pen/KKNdgXb)
 
 Demonstrates usage of Iframily to communicate between a parent frame and multiple child frames through interactive conversations in a family of five. How will mom handle all these questions? You decide!
 
-[<img src="https://user-images.githubusercontent.com/3951311/81200872-3ba5a300-8fcd-11ea-90cf-7de98cacfaf8.png" width=400>](https://codepen.io/OpherV/pen/PoPQwaz?editors=0010)
+[<img src="https://codepen.io/asimen1/pen/KKNdgXb/image/small.png" width=400>](https://codepen.io/asimen1/pen/KKNdgXb)
 
-[Crazy Tetris](https://codepen.io/OpherV/pen/QWjQbmZ?editors=1100)
+[Crazy Tetris](https://codepen.io/asimen1/pen/qBqOZMY)
 
 A novel (and somewhat strange) reimplementation of the classic Tetris using Iframily! Each frame runs its own self-contained Tetris instance. The twist? Instead of moving the pieces, the player moves the frames themselves to align the pieces and allow them to flow freely between frames.
 
-[<img src="https://user-images.githubusercontent.com/3951311/86790421-14249280-c071-11ea-91fd-1fe57bb357e7.png" width=400>](https://codepen.io/OpherV/pen/QWjQbmZ?editors=1100)
+[<img src="https://codepen.io/asimen1/pen/qBqOZMY/image/small.png" width=400>](https://codepen.io/OpherV/pen/QWjQbmZ?editors=1100)
 
 See the repo's `examples/` directory for the source code.
 
