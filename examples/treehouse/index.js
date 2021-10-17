@@ -5,7 +5,14 @@ let parentIframily = window.Iframily.initParent('treehouse', window.location.ori
 document.addEventListener('DOMContentLoaded', () => {
     setupDialogue('root');
 
-    document.querySelector('.end button').addEventListener('click', () => window.location.reload());
+    document.querySelector('.end button').addEventListener('click', () => {
+        parentIframily.sendMessage('reload');
+        document.body.classList.remove('ended');
+        setupDialogue('root');
+
+        parentIframily.dispose();
+        parentIframily = window.Iframily.initParent('treehouse', window.location.origin);
+    });
 });
 
 function setupDialogue(dialogueId) {

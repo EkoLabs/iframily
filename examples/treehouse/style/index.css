@@ -23,8 +23,7 @@ body {
 body .end {
   opacity: 0;
   pointer-events: none;
-  transition: opacity 1s ease-out;
-  transition-delay: 3.5s; }
+ }
 
 body.ended .end {
   opacity: 1;
@@ -34,6 +33,8 @@ body.ended .end {
   left: 0;
   width: 100%;
   height: 100%;
+  transition: opacity 1s ease-out;
+  transition-delay: 3.5s;
   background: linear-gradient(90deg, rgba(0, 0, 0, 0.5) 2px, transparent 1%), url(../images/bg.gif);
   background-size: 3px 2px, cover;
   background-position: center;
