@@ -1,6 +1,6 @@
 'use strict';
 
-const START_DELAY = 5000;
+const START_DELAY = (Math.random() * (12000 - 3000)) + 3000;
 const QUESTION_RANDOM_TIME_MIN = 3000;
 const QUESTION_RANDOM_TIME_MAX = 30000;
 const QUESTION_TIMEOUT = 20000;
@@ -56,8 +56,12 @@ function addMessage(text, showDots, type) {
     });
 }
 
-function askQuestionInRandomTime() {
-    let randTime = Math.random() * ((QUESTION_RANDOM_TIME_MAX - QUESTION_RANDOM_TIME_MIN) + QUESTION_RANDOM_TIME_MIN);
+function askQuestionInRandomTime(randTime) {
+    // Generate random time if not given.
+    if (typeof randTime !== 'number') {
+        randTime = (Math.random() * (QUESTION_RANDOM_TIME_MAX - QUESTION_RANDOM_TIME_MIN)) + QUESTION_RANDOM_TIME_MIN;
+    }
+
     setTimeout(() => {
         let currQuestion = getRandomQuestion();
         prevQuestion = currQuestion;
@@ -102,9 +106,9 @@ function askQuestionInRandomTime() {
 }
 
 
-// wait a bit before starting so it's not overwhelming
+// Wait a bit before starting so it's not overwhelming.
 setTimeout(()=> {
-    askQuestionInRandomTime();
+    askQuestionInRandomTime(0);
 }, START_DELAY);
 
 

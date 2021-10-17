@@ -1,6 +1,5 @@
 'use strict';
 
-/* eslint-disable quote-props, max-len */
 let dialogue = {
     'root': [
         {
@@ -123,7 +122,6 @@ let dialogue = {
         }
     ]
 };
-/* eslint-enable quote-props, max-len */
 
 window.getDialogueOptions = function(id, onChoose) {
     let optionButtons = [];

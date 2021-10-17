@@ -3,6 +3,9 @@
 
     "rules": {
         "no-use-before-define": ["error", { "functions": false, "classes": true, "variables": true }],
-        "dot-notation": 0
+        "dot-notation": 0,
+        "max-len": 0,
+        "quote-props": 0,
+        "no-magic-numbers": 0
     }
 }
