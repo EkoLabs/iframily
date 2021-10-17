@@ -88,18 +88,18 @@ body.ended .end{
   padding-bottom:   1275px / 2354px * 100%;
   width: 100%;
   position: relative;
-  margin-top: 50px;
+  margin-top: 10vw;
 
     @include shortAndWide{
       position: absolute;
       top: 0;
-      margin-top: -330px;
+      margin-top: -61vh;
      }
 
     @include shortAndHalfWide{
       position: absolute;
       top: 0;
-      margin-top: -250px;
+      margin-top: -60vmin;
     }
   }
 
