@@ -561,6 +561,8 @@
         unpause();
       } else if (msg.action === 'addScore') {
         addScore(msg.value);
+      } else if (msg.action === 'reload') {
+        window.location.reload();
       }
     });
 

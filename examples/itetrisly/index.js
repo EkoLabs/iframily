@@ -176,10 +176,10 @@ function keydown(e) {
         case 32: // Space
             if (gamePendingStart) {
                 if (shouldReloadOnStart) {
-                    window.frames['topIframe'].location.reload();
-                    window.frames['bottom1'].location.reload();
-                    window.frames['bottom2'].location.reload();
-                    window.frames['bottom3'].location.reload();
+                    parentTopIframily.sendMessage({ action: 'reload' });
+                    parentBottomIframiliesArr.forEach((parentBottomIframily) => {
+                        parentBottomIframily.sendMessage({ action: 'reload' });
+                    });
 
                     doneMessagesCounter = 0;
                     initFramilies();
