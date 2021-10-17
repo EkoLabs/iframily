@@ -16,7 +16,7 @@ body {
   padding: 0;
   font-family: 'Open Sans', sans-serif; }
 
-@media only screen and (max-height: 600px) {
+@media only screen and (max-height: 700px) {
   body {
     overflow: hidden; } }
 
@@ -65,11 +65,19 @@ body.ended .end button span {
   padding-bottom: 54.16313%;
   width: 100%;
   position: relative;
-  margin-top: -90px; }
+  margin-top: 50px; }
 
-@media only screen and (max-height: 600px) {
+@media only screen and (max-height: 700px) {
   #aspect_ratio_box {
-    margin-top: 45px; } }
+    position: absolute;
+    top: 0;
+    margin-top: -330px; } }
+
+@media only screen and (max-height: 700px) and (max-width: 1300px) {
+  #aspect_ratio_box {
+    position: absolute;
+    top: 0;
+    margin-top: -250px; } }
 
 #container {
   position: absolute;
@@ -87,7 +95,7 @@ body.ended .end button span {
   width: 133px;
   height: 133px;
   left: 84px;
-  top: 95px;
+  top: 65px;
   z-index: 10; }
 
 .logo img {
@@ -104,10 +112,10 @@ body.ended .end button span {
   color: white;
   font-size: 14px; }
 
-@media only screen and (max-height: 600px) {
+@media only screen and (max-height: 700px) {
   .shoutout {
-    top: 530px;
-    left: 20px; } }
+    bottom: 10px;
+    left: 40px; } }
 
 .shoutout a.ekologo {
   position: relative;
@@ -135,7 +143,7 @@ iframe {
   display: block;
   width: 284px;
   left: 27px;
-  top: 239px;
+  top: 219px;
   z-index: 10;
   font-size: 18px;
   color: black;

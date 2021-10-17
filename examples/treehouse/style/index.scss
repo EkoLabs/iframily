@@ -2,7 +2,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 
 @mixin shortAndWide {
-  @media only screen and (max-height: 600px) {
+  @media only screen and (max-height: 700px) {
+    @content;
+  }
+}
+
+@mixin shortAndHalfWide {
+  @media only screen and (max-height: 700px)  and (max-width: 1300px){
     @content;
   }
 }
@@ -82,11 +88,19 @@ body.ended .end{
   padding-bottom:   1275px / 2354px * 100%;
   width: 100%;
   position: relative;
-  margin-top: -90px;
+  margin-top: 50px;
 
-  @include shortAndWide{
-      margin-top: 45px;
-   }
+    @include shortAndWide{
+      position: absolute;
+      top: 0;
+      margin-top: -330px;
+     }
+
+    @include shortAndHalfWide{
+      position: absolute;
+      top: 0;
+      margin-top: -250px;
+    }
   }
 
 #container{
@@ -107,7 +121,7 @@ body.ended .end{
   width: 133px;
   height: 133px;
   left: 84px;
-  top: 95px;
+  top: 65px;
   z-index: 10;
 
   img {
@@ -127,8 +141,8 @@ body.ended .end{
   font-size: 14px;
 
   @include shortAndWide{
-    top: 530px;
-    left: 20px;
+    bottom: 10px;
+    left: 40px;
   }
 }
 
@@ -161,7 +175,7 @@ iframe{
   display: block;
   width: 284px;
   left: 27px;
-  top: 239px;
+  top: 219px;
   z-index: 10;
   font-size: 18px;
   //text-shadow: 2px 2px 27px black;
