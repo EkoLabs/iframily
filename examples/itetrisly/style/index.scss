@@ -166,6 +166,13 @@ body.parent{
     .credits{
       margin-left: auto;
 
+      small{
+        display: block;
+        font-size: 12px;
+        a {color: white}
+        margin-top: 10px;
+      }
+
       .ekologo{
         position: relative;
         top: 4px;

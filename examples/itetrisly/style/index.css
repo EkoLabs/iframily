@@ -137,6 +137,14 @@ body.parent #bottomContainer {
 .container .footer .credits {
   margin-left: auto; }
 
+.container .footer .credits small {
+  display: block;
+  font-size: 12px;
+  margin-top: 10px; }
+
+.container .footer .credits small a {
+  color: white; }
+
 .container .footer .credits .ekologo {
   position: relative;
   top: 4px;
