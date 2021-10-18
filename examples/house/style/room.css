@@ -51,14 +51,17 @@ ul {
   flex-direction: column;
   font-size: 15px;
   overflow-y: scroll;
+  touch-action: none;
+  scroll-behavior: smooth;
   scrollbar-width: none;
   /* Firefox */
   -ms-overflow-style: none;
   /* IE 10+ */ }
-  ul::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
-    /* Chrome/Safari/Webkit */ }
+
+ul::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+  /* Chrome/Safari/Webkit */ }
 
 li {
   box-sizing: border-box;
@@ -71,13 +74,15 @@ li {
   max-width: 70%;
   font-family: 'Open Sans', sans-serif;
   scroll-margin: 10px; }
-  li.sent {
-    background: white;
-    border-radius: 5px;
-    border-top-right-radius: 0;
-    align-self: flex-end; }
-  li:last-child {
-    margin-bottom: 1000px; }
+
+li.sent {
+  background: white;
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  align-self: flex-end; }
+
+li:last-child {
+  margin-bottom: 1000px; }
 
 .message {
   animation: showBubble 0.3s ease-out; }
@@ -98,20 +103,24 @@ li {
   align-items: center;
   display: flex;
   height: 17px; }
-  .dots span {
-    background-color: white;
-    animation: mercuryTypingAnimation 1.5s infinite ease-in-out;
-    border-radius: 2px;
-    display: inline-block;
-    height: 4px;
-    margin-right: 2px;
-    width: 4px; }
-    .dots span:nth-child(1) {
-      nimation-delay: 200ms; }
-    .dots span:nth-child(2) {
-      animation-delay: 300ms; }
-    .dots span:nth-child(3) {
-      animation-delay: 400ms; }
+
+.dots span {
+  background-color: white;
+  animation: mercuryTypingAnimation 1.5s infinite ease-in-out;
+  border-radius: 2px;
+  display: inline-block;
+  height: 4px;
+  margin-right: 2px;
+  width: 4px; }
+
+.dots span:nth-child(1) {
+  nimation-delay: 200ms; }
+
+.dots span:nth-child(2) {
+  animation-delay: 300ms; }
+
+.dots span:nth-child(3) {
+  animation-delay: 400ms; }
 
 @keyframes showBubble {
   0% {

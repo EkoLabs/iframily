@@ -59,6 +59,8 @@ ul{
   flex-direction: column;
   font-size: 15px;
   overflow-y: scroll;
+  touch-action: none;
+  scroll-behavior: smooth;
 
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* IE 10+ */

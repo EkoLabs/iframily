@@ -113,9 +113,10 @@ setTimeout(()=> {
 
 
 // Disable scrolling
-window.onwheel = function() {
+document.querySelector("#dialog").addEventListener("wheel", e=>{
+    e.preventDefault();
     return false;
-};
+});
 
 document.body.ontouchend = (e) => {
     e.preventDefault();
