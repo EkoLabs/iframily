@@ -47,9 +47,9 @@ function initFramilies() {
     function initParentBottomIframily(id) {
         return window.Iframily.initParent(id, window.location.origin, (msg) => {
             if (msg.action === 'lose') {
-                gameMessageEl.style.color = 'red';
-                gameMessageEl.style.display = 'block';
                 gameMessageEl.innerHTML = 'game over<small>hit space to restart</small>';
+                document.body.classList.add("lost");
+                document.body.classList.remove("started");
 
                 gamePendingStart = true;
                 shouldReloadOnStart = true;
@@ -186,7 +186,9 @@ function keydown(e) {
                 }
 
                 parentTopIframily.sendMessage({ action: 'start' });
-                gameMessageEl.style.display = 'none';
+                document.body.classList.remove("ready");
+                document.body.classList.remove("lost");
+                document.body.classList.add("started");
                 gamePendingStart = false;
             }
 
