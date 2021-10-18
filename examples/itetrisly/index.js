@@ -77,9 +77,14 @@ function move(dir) {
     let moveVals = { left: -1, right: 1 };
     let moveVal = moveVals[dir];
 
-    currPosX = currPosX + moveVal;
-    translateValueX = currPosX * (BOARD_X_SIZE * 2);
-    bottomContainerEl.style.transform = `translate(${translateValueX}px, 0px)`;
+    // Apply new position only if don't reach limit (set as the size of two boards).
+    let newPosX = currPosX + moveVal;
+    let twoBoardsSize = BOARD_X_SIZE * 2;
+    if (newPosX >= -twoBoardsSize && newPosX <= twoBoardsSize) {
+        currPosX = currPosX + moveVal;
+        translateValueX = currPosX * (BOARD_X_SIZE * 2);
+        bottomContainerEl.style.transform = `translate(${translateValueX}px, 0px)`;
+    }
 }
 
 function drop(msg) {
