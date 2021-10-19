@@ -69,7 +69,7 @@ Demonstrates usage of Iframily to communicate between a parent frame and multipl
 
 A novel (and somewhat strange) reimplementation of the classic Tetris using Iframily! Each frame runs its own self-contained Tetris instance. The twist? Instead of moving the pieces, the player moves the frames themselves to align the pieces and allow them to flow freely between frames.
 
-[<img src="https://s3.amazonaws.com/eko.com/s/iframily/codepen-tetris.png" width=400>](https://codepen.io/OpherV/pen/QWjQbmZ?editors=1100)
+[<img src="https://s3.amazonaws.com/eko.com/s/iframily/codepen-tetris.png" width=400>](https://codepen.io/asimen1/pen/qBqOZMY)
 
 See the repo's `examples/` directory for the source code.
 
