@@ -1,6 +1,6 @@
 {
   "name": "@ekolabs/iframily",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "postMessage made simple & safe",
   "main": "dist/iframily.min.js",
   "license": "Apache-2.0",
