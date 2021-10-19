@@ -53,7 +53,7 @@ Iframily pushes you to be more responsible with your frame security by keeping i
 
 ## Examples
 
-[Invasion of the frame snatchers](https://codepen.io/asimen1/pen/ZEBzaLd)
+[Invasion of the Frame Snatchers](https://codepen.io/asimen1/pen/ZEBzaLd)
 
 Demonstrates a simple usage of Iframily to communicate between a parent and child frame through an interactive, sweet father-son dialogue about world domination.
 
